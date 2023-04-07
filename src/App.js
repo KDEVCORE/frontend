@@ -1,4 +1,4 @@
-import { AppBar, Box, Button, CircularProgress, Container, Grid, List, Paper, Toolbar, Typography } from "@mui/material";
+import { AppBar, Box, Button, CircularProgress, Grid, List, ListItem, Paper, Toolbar, Typography } from "@mui/material";
 import { useEffect, useState } from "react";
 import AddTodo from "./pages/todo/AddTodo";
 import Todo from "./pages/todo/Todo";
@@ -17,32 +17,30 @@ function App() {
 
   const addItem = (item) => {
     call("/todo", "POST", item)
-    .then((response) => setItems(response.data));
+      .then((response) => setItems(response.data));
   };
 
   const editItem = (item) => {
     call("/todo", "PUT", item)
-    .then((response) => setItems(response.data));
+      .then((response) => setItems(response.data));
   };
 
   const deleteItem = (item) => {
     call("/todo", "DELETE", item)
-    .then((response) => setItems(response.data));
+      .then((response) => setItems(response.data));
   };
 
   let todoItems = items.length > 0 && (
-    <Paper style={{ margin: 16 }}>
-      <List>
-        {items.map((item) => (
-          <Todo
-            item={item}
-            key={item.id}
-            editItem={editItem}
-            deleteItem={deleteItem}
-          />
-        ))}
-      </List>
-    </Paper>
+    <List>
+      {items.map((item) => (
+        <Todo
+          item={item}
+          key={item.id}
+          editItem={editItem}
+          deleteItem={deleteItem}
+        />
+      ))}
+    </List>
   );
 
   let navigationBar = (
@@ -63,11 +61,11 @@ function App() {
   );
 
   let todoListPage = (
-    <Box maxWidth="md">
+    <Paper style={{ margin: 16 }}>
       {navigationBar}
       <AddTodo addItem={addItem} />
       {todoItems}
-    </Box>
+    </Paper>
   );
 
   let loadingPage = (
@@ -76,7 +74,7 @@ function App() {
     </Box>
   );
 
-  return <Container>{!loading ? todoListPage : loadingPage}</Container>;
+  return <Box textAlign={"center"}>{!loading ? todoListPage : loadingPage}</Box>;
 }
 
 export default App;
