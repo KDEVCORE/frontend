@@ -24,9 +24,7 @@ function AppRouter() {
                     <Route path="/signup" element={<SignUp />} />
                 </Routes>
             </BrowserRouter>
-            <Paper component={"footer"}>
-                <Copyright />
-            </Paper>
+            <Copyright />
         </Container>
     );
 }
