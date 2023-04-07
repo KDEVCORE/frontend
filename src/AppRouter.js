@@ -1,4 +1,4 @@
-import { Container, Paper, Typography } from "@mui/material";
+import { Container, Typography } from "@mui/material";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import App from "./App";
 import SignIn from "./pages/member/SignIn";
