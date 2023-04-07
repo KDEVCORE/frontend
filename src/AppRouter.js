@@ -2,6 +2,7 @@ import { Container, Typography } from "@mui/material";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import App from "./App";
 import SignIn from "./pages/member/SignIn";
+import SignInOAuth2 from "./pages/member/SignInOAuth2";
 import SignUp from "./pages/member/SignUp";
 
 function AppRouter() {
@@ -19,6 +20,7 @@ function AppRouter() {
                 <Routes>
                     <Route path="/" element={<App />} />
                     <Route path="/signin" element={<SignIn />} />
+                    <Route path="/signin-oauth" element={<SignInOAuth2 />} />
                     <Route path="/signup" element={<SignUp />} />
                 </Routes>
             </BrowserRouter>

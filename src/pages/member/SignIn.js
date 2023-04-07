@@ -1,8 +1,8 @@
 import { ExitToApp, GitHub, Google, Security } from "@mui/icons-material";
 import { Avatar, Box, Button, Container, Divider, Stack, TextField, Typography } from "@mui/material";
 import React from "react";
-import { Link, Navigate } from "react-router-dom";
-import { signIn } from "../../service/ApiService";
+import { Link } from "react-router-dom";
+import { signIn, signInOAuth2 } from "../../service/ApiService";
 
 function SignIn() {
   const handleSignIn = (event) => {
@@ -12,13 +12,8 @@ function SignIn() {
   };
 
   const handleSignInOauth2 = (provider) => {
-    const token = new URLSearchParams(window.location.search).get("token");
-
-    if(token) localStorage.setItem("ACCESS_TOKEN", token);
-    return (
-        <Navigate to={{ pathname: (token ? "/" : "/signin"), state: { from: provider.location }, }} />
-    );
-};
+    signInOAuth2(provider);
+  };
 
   return (
     <Container
