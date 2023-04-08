@@ -2,7 +2,7 @@ import { ExitToApp, Security } from "@mui/icons-material";
 import { Avatar, Box, Button, ButtonGroup, Container, Divider, Paper, TextField, Typography } from "@mui/material";
 import React from "react";
 import { Link } from "react-router-dom";
-import { signIn } from "../../service/ApiService";
+import { signIn, signInOAuth2 } from "../../service/ApiService";
 
 function SignIn() {
   const handleSignIn = (event) => {
@@ -12,8 +12,7 @@ function SignIn() {
   };
 
   const handleSignInOauth2 = (provider) => {
-    // signInOAuth2(provider);
-    console.log(provider);
+    signInOAuth2(provider);
   };
 
   return (
@@ -83,16 +82,16 @@ function SignIn() {
           orientation="horizontal"
           fullWidth
         >
-          <Button aria-label="social login button from google" name="google" onClick={e => handleSignInOauth2(e.target.name)}>
+          <Button aria-label="social login button from google" onClick={handleSignInOauth2("google")}>
             <Avatar variant="circular" src="/static/images/google_g_logo_icon.png" />
           </Button>
-          <Button aria-label="social login button from kakao" name="kakao" onClick={e => handleSignInOauth2(e.target.name)}>
+          <Button aria-label="social login button from kakao" onClick={e => handleSignInOauth2("kakao")}>
             <Avatar variant="rounded" src="/static/images/kakaotalk_sharing_btn_small.png" />
           </Button>
-          <Button aria-label="social login button from naver" name="naver" onClick={e => handleSignInOauth2(e.target.name)}>
+          <Button aria-label="social login button from naver" onClick={e => handleSignInOauth2("naver")}>
             <Avatar variant="rounded" src="/static/images/btn_icon_rounded.png" />
           </Button>
-          <Button aria-label="social login button from github" name="github" onClick={e => handleSignInOauth2(e.target.name)}>
+          <Button aria-label="social login button from github" onClick={e => handleSignInOauth2("github")}>
             <Avatar variant="circular" src="/static/images/github-mark.png" />
           </Button>
         </ButtonGroup>
