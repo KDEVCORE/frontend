@@ -20,6 +20,8 @@ export function call(api, method, request) {
       return response.json();
     } else if (response.status === 403) {
       window.location.href = "/signin"; // redirect
+    } else if (response.status === 400) {
+      alert("입력 정보를 확인해 주십시오.");
     } else {
       new Error(response);
     }
