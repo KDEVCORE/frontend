@@ -1,5 +1,5 @@
 import { PersonAdd, Publish } from "@mui/icons-material";
-import { Avatar, Box, Button, Container, TextField, Typography } from "@mui/material";
+import { Avatar, Box, Button, Container, Paper, TextField, Typography } from "@mui/material";
 import React from "react";
 import { Link } from "react-router-dom";
 import { signUp } from "../../service/ApiService";
@@ -33,7 +33,7 @@ function SignUp() {
         <Typography variant="h4">
           {"SIGN UP"}
         </Typography>
-        <form noValidate sx={{ mt: 1 }} onSubmit={handleSubmit}>
+        <form noValidate sx={{ mt: 2 }} onSubmit={handleSubmit}>
           <TextField
             type="text"
             variant="outlined"
@@ -61,13 +61,18 @@ function SignUp() {
             type="submit"
             fullWidth
             variant="contained"
-            sx={{ mt: 3, mb: 2 }}
+            sx={{ mt: 2 }}
             startIcon={<Publish />}>
             Sign Up
           </Button>
         </form>
       </Box>
-      <Link to="/signin">{"이미 계정이 있습니까? 돌아가 로그인 하세요."}</Link>
+      <Paper
+        sx={{ mt: 2, p: 1, textAlign: "center" }}
+        elevation={4}
+      >
+        <Link to="/signin">{"이미 계정이 있습니까? 돌아가 로그인 하세요."}</Link>
+      </Paper>
     </Container>
   );
 }

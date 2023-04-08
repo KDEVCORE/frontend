@@ -1,8 +1,8 @@
-import { ExitToApp, GitHub, Google, Security } from "@mui/icons-material";
-import { Avatar, Box, Button, Container, Divider, Stack, TextField, Typography } from "@mui/material";
+import { ExitToApp, Security } from "@mui/icons-material";
+import { Avatar, Box, Button, ButtonGroup, Container, Divider, Paper, TextField, Typography } from "@mui/material";
 import React from "react";
 import { Link } from "react-router-dom";
-import { signIn, signInOAuth2 } from "../../service/ApiService";
+import { signIn } from "../../service/ApiService";
 
 function SignIn() {
   const handleSignIn = (event) => {
@@ -12,7 +12,8 @@ function SignIn() {
   };
 
   const handleSignInOauth2 = (provider) => {
-    signInOAuth2(provider);
+    // signInOAuth2(provider);
+    console.log(provider);
   };
 
   return (
@@ -34,7 +35,7 @@ function SignIn() {
         <Typography variant="h4">
           {"SIGN IN"}
         </Typography>
-        <form noValidate sx={{ mt: 1 }} onSubmit={handleSignIn}>
+        <form noValidate sx={{ mt: 2 }} onSubmit={handleSignIn}>
           <TextField
             type="text"
             variant="outlined"
@@ -62,39 +63,40 @@ function SignIn() {
             type="submit"
             fullWidth
             variant="contained"
-            sx={{ mt: 3, mb: 2 }}
+            sx={{ mt: 2 }}
             startIcon={<ExitToApp />}>
             Sign In
           </Button>
         </form>
       </Box>
-      <Link to="/signup">{"계정이 없습니까? 여기서 생성하세요."}</Link>
-      <Divider sx={{ mt: 2, mb: 2 }}>
+      <Paper
+        sx={{ mt: 2, p: 1, textAlign: "center" }}
+        elevation={4}
+      >
+        <Link to="/signup">{"계정이 없습니까? 여기서 생성하세요."}</Link>
+      </Paper>
+      <Divider sx={{ mt: 2 }}>
         <Typography variant="subtitle1">또는</Typography>
       </Divider>
-      <Stack
-        direction="row"
-        justifyContent="center"
-        alignItems="center"
-        spacing={3}
-      >
-        <Button
-          variant="contained"
-          name="github"
-          onClick={e => handleSignInOauth2(e.target.name)}
-          startIcon={<GitHub />}
+      <Paper sx={{ mt: 2, p: 1, textAlign: "center" }} elevation={6}>
+        <ButtonGroup
+          orientation="horizontal"
+          fullWidth
         >
-          {"GitHub"}
-        </Button>
-        <Button
-          variant="contained"
-          name="google"
-          onClick={e => handleSignInOauth2(e.target.name)}
-          startIcon={<Google />}
-        >
-          {"Google"}
-        </Button>
-      </Stack>
+          <Button aria-label="social login button from google" name="google" onClick={e => handleSignInOauth2(e.target.name)}>
+            <Avatar variant="circular" src="/static/images/google_g_logo_icon.png" />
+          </Button>
+          <Button aria-label="social login button from kakao" name="kakao" onClick={e => handleSignInOauth2(e.target.name)}>
+            <Avatar variant="rounded" src="/static/images/kakaotalk_sharing_btn_small.png" />
+          </Button>
+          <Button aria-label="social login button from naver" name="naver" onClick={e => handleSignInOauth2(e.target.name)}>
+            <Avatar variant="rounded" src="/static/images/btn_icon_rounded.png" />
+          </Button>
+          <Button aria-label="social login button from github" name="github" onClick={e => handleSignInOauth2(e.target.name)}>
+            <Avatar variant="circular" src="/static/images/github-mark.png" />
+          </Button>
+        </ButtonGroup>
+      </Paper>
     </Container>
   );
 }

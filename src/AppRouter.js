@@ -1,4 +1,4 @@
-import { Container, Typography } from "@mui/material";
+import { Container, Paper, Typography } from "@mui/material";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import App from "./App";
 import SignIn from "./pages/member/SignIn";
@@ -24,7 +24,9 @@ function AppRouter() {
                     <Route path="/signup" element={<SignUp />} />
                 </Routes>
             </BrowserRouter>
-            <Copyright />
+            <Paper elevation={0} sx={{ mt: 10 }}>
+                <Copyright />
+            </Paper>
         </Container>
     );
 }
