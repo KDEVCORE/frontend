@@ -1,17 +1,38 @@
 import { PersonAdd, Publish } from "@mui/icons-material";
 import { Avatar, Box, Button, Container, Paper, TextField, Typography } from "@mui/material";
-import React from "react";
+import React, { useState } from "react";
 import { Link } from "react-router-dom";
-import { signUp } from "../../service/ApiService";
+import { call, signUp } from "../../service/ApiService";
+import { strengthColor, strengthIndicator } from "../../utils/password-strength";
 
 function SignUp() {
+  const [validIdentifier, setValidIdentifier] = useState(false);
+  const [strength, setStrength] = useState(0);
+  const [level, setLevel] = useState();
+  
+  const changePassword = (value) => {
+    const temp = strengthIndicator(value);
+    setStrength(temp);
+    setLevel(strengthColor(temp));
+  };
+
   const handleSubmit = (event) => {
     event.preventDefault();
     const data = new FormData(event.target);
-    signUp({ username: data.get("username"), password: data.get("password") })
-      .then((response) => {
-        window.location.href = "/signin";
-      });
+    const dto = {
+      identifier: data.get("identifier"),
+      password: data.get("password"),
+      name: data.get("name"),
+      email: data.get("email")
+    }
+    signUp(dto).then((response) => {
+      window.location.href = "/signin";
+    });
+  };
+
+  const handleValidation = (identifier) => {
+    call("/member/id-check", "POST", { identifier: identifier })
+    .then((response) => setValidIdentifier(response.data));
   };
 
   return (
@@ -35,25 +56,66 @@ function SignUp() {
         </Typography>
         <form noValidate sx={{ mt: 2 }} onSubmit={handleSubmit}>
           <TextField
+            id="identifier"
+            name="identifier"
             type="text"
             variant="outlined"
             margin="normal"
             label="ID"
-            id="username"
-            name="username"
-            autoComplete="username"
             required
             fullWidth
-            autoFocus
+            onBlur={e => handleValidation(e.target.value)}
+            helperText={
+              <Typography variant="subtitle1">
+                {validIdentifier ? "It's possible to use." : "Not available."}
+              </Typography>
+            }
           />
           <TextField
+            id="password"
+            name="password"
             type="password"
             variant="outlined"
             margin="normal"
             label="Password"
-            id="password"
-            name="password"
-            autoComplete="new-password"
+            required
+            fullWidth
+            onChange={(e) => {
+              changePassword(e.target.value);
+            }}
+            helperText={strength !== 0 && (
+              <Typography variant="subtitle1">
+                {level?.label}
+              </Typography>
+            )}
+          />
+          <TextField
+            id="confirm-password"
+            name="confirm-password"
+            type="password"
+            variant="outlined"
+            margin="normal"
+            label="Confirm Password"
+            required
+            fullWidth
+          />
+          <TextField
+            id="name"
+            name="name"
+            type="text"
+            variant="outlined"
+            margin="normal"
+            label="Your Name"
+            required
+            fullWidth
+          />
+          <TextField
+            id="email"
+            name="email"
+            type="email"
+            variant="outlined"
+            margin="normal"
+            label="E-Mail"
             required
             fullWidth
           />

@@ -8,7 +8,7 @@ function SignIn() {
   const handleSignIn = (event) => {
     event.preventDefault();
     const data = new FormData(event.target);
-    signIn({ username: data.get("username"), password: data.get("password") });
+    signIn({ identifier: data.get("identifier"), password: data.get("password") });
   };
 
   const handleSignInOauth2 = (provider) => {
@@ -36,25 +36,24 @@ function SignIn() {
         </Typography>
         <form noValidate sx={{ mt: 2 }} onSubmit={handleSignIn}>
           <TextField
+            id="identifier"
+            name="identifier"
             type="text"
             variant="outlined"
             margin="normal"
             label="ID"
-            id="username"
-            name="username"
-            autoComplete="username"
+            autoComplete="identifier"
             required
             fullWidth
             autoFocus
           />
           <TextField
+            id="password"
+            name="password"
             type="password"
             variant="outlined"
             margin="normal"
             label="Password"
-            id="password"
-            name="password"
-            autoComplete="new-password"
             required
             fullWidth
           />

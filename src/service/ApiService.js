@@ -33,12 +33,11 @@ export function call(api, method, request) {
 
 export function signIn(userDTO) {
   return call("/member/signin", "POST", userDTO)
-    .then((response) => {
-      if (response.token) {
-        localStorage.setItem("ACCESS_TOKEN", response.token);
-        window.location.href = "/";
-      }
-    });
+          .then((response) => {
+            if (response.token) {
+              localStorage.setItem("ACCESS_TOKEN", response.token);
+              window.location.href = "/";
+          }});
 }
 
 export function signOut() {
@@ -52,5 +51,5 @@ export function signUp(userDTO) {
 
 export function signInOAuth2(provider) {
   const FRONTEND_URL = window.location.protocol + "//" + window.location.host;
-  window.location.href = API_BASE_URL + "/member/authorize/" + provider + "?redirect_uri=" + FRONTEND_URL
+  window.location.href = API_BASE_URL + "/oauth2/authorization/" + provider + "?redirect_uri=" + FRONTEND_URL
 }
