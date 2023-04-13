@@ -35,7 +35,7 @@ function App() {
       {items.map((item) => (
         <Todo
           item={item}
-          key={item.id}
+          key={item.uuid}
           editItem={editItem}
           deleteItem={deleteItem}
         />
