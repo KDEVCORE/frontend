@@ -5,10 +5,10 @@ Web 개발 목적의 실습을 위한 프로젝트입니다. Back-End에서 인�
 - Membership
     - 회원 가입
     - 로그인
-    - 회원 로그인 & SSO 로그인
+        - 회원 로그인
+        - SSO 로그인 (Google, kakao, Naver, GitHub)
 - Contents
-    - Open content
-    - Main content (Member only)
+    - Demo content: Todo List (Member only)
 ## Skills
 다음의 기술을 사용하여 개발합니다.
 - React  
@@ -18,3 +18,8 @@ Web 개발 목적의 실습을 위한 프로젝트입니다. Back-End에서 인�
 ## Deployment
 배포는 다음의 솔루션을 사용합니다.
 - AWS Elastic Beanstalk
+
+## Result
+- URL
+  - Front-End: https://app.kdevcore.com
+  - Back-End: https://api.kdevcore.com/swagger-ui/index.html
