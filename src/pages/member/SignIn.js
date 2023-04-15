@@ -1,10 +1,12 @@
-import { ExitToApp, Security } from "@mui/icons-material";
-import { Avatar, Box, Button, ButtonGroup, Container, Divider, Paper, TextField, Tooltip, Typography, Zoom } from "@mui/material";
-import React from "react";
+import { ExitToApp, Security, Visibility, VisibilityOff } from "@mui/icons-material";
+import { Avatar, Box, Button, ButtonGroup, Container, Divider, IconButton, InputAdornment, Paper, TextField, Tooltip, Typography, Zoom } from "@mui/material";
+import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import { signIn, signInOAuth2 } from "../../service/ApiService";
 
 function SignIn() {
+  const [showPassword, setShowPassword] = useState(false);
+
   const handleSignIn = (event) => {
     event.preventDefault();
     const data = new FormData(event.target);
@@ -50,12 +52,21 @@ function SignIn() {
           <TextField
             id="password"
             name="password"
-            type="password"
+            type={showPassword ? "text" : "password"}
             variant="outlined"
             margin="normal"
             label="Password"
             required
             fullWidth
+            InputProps={{
+              endAdornment: (
+                <InputAdornment position="end">
+                  <IconButton onClick={() => setShowPassword(!showPassword)} edge="end">
+                  {showPassword ? <Visibility /> : <VisibilityOff />}
+                  </IconButton>
+                </InputAdornment>
+              ),
+            }}
           />
           <Button
             type="submit"

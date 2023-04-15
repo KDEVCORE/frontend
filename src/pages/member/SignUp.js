@@ -1,19 +1,26 @@
-import { PersonAdd, Publish } from "@mui/icons-material";
-import { Avatar, Box, Button, Container, Paper, TextField, Typography } from "@mui/material";
+import { PersonAdd, Publish, Visibility, VisibilityOff } from "@mui/icons-material";
+import { Avatar, Box, Button, Container, IconButton, InputAdornment, Paper, TextField, Typography } from "@mui/material";
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import { call, signUp } from "../../service/ApiService";
 import { strengthColor, strengthIndicator } from "../../utils/password-strength";
 
 function SignUp() {
-  const [validIdentifier, setValidIdentifier] = useState(false);
-  const [strength, setStrength] = useState(0);
-  const [level, setLevel] = useState();
+  const [showPassword, setShowPassword] = useState(false);
+  const [validIdentifier, setValidIdentifier] = useState();
+  const [strength, setStrength] = useState();
   
   const changePassword = (value) => {
-    const temp = strengthIndicator(value);
-    setStrength(temp);
-    setLevel(strengthColor(temp));
+    const level = strengthIndicator(value);
+    setStrength(strengthColor(level));
+  };
+  
+  const checkIdentifier = (identifier) => {
+    call("/member/id-check", "POST", { identifier: identifier })
+    .then((response) => {
+      if(response) setValidIdentifier({ label: "Not available", color: "#f44336" });
+      else setValidIdentifier({ label: "It's possible to use", color: "#00c853" });
+    });
   };
 
   const handleSubmit = (event) => {
@@ -30,10 +37,6 @@ function SignUp() {
     });
   };
 
-  const handleValidation = (identifier) => {
-    call("/member/id-check", "POST", { identifier: identifier })
-    .then((response) => setValidIdentifier(response.data));
-  };
 
   return (
     <Container
@@ -47,6 +50,7 @@ function SignUp() {
           flexDirection: 'column',
           alignItems: 'center',
         }}
+        noValidate
       >
         <Avatar sx={{ m: 1, bgcolor: 'black' }}>
           <PersonAdd />
@@ -64,40 +68,33 @@ function SignUp() {
             label="ID"
             required
             fullWidth
-            onBlur={e => handleValidation(e.target.value)}
-            helperText={
-              <Typography variant="subtitle1">
-                {validIdentifier ? "It's possible to use." : "Not available."}
-              </Typography>
-            }
+            onBlur={(e) => {
+              checkIdentifier(e.target.value);
+            }}
+            helperText={validIdentifier?.label}
           />
           <TextField
             id="password"
             name="password"
-            type="password"
+            type={showPassword ? "text" : "password"}
             variant="outlined"
             margin="normal"
             label="Password"
             required
             fullWidth
+            InputProps={{
+              endAdornment: (
+                <InputAdornment position="end">
+                  <IconButton onClick={() => setShowPassword(!showPassword)} edge="end">
+                  {showPassword ? <Visibility /> : <VisibilityOff />}
+                  </IconButton>
+                </InputAdornment>
+              ),
+            }}
             onChange={(e) => {
               changePassword(e.target.value);
             }}
-            helperText={strength !== 0 && (
-              <Typography variant="subtitle1">
-                {level?.label}
-              </Typography>
-            )}
-          />
-          <TextField
-            id="confirm-password"
-            name="confirm-password"
-            type="password"
-            variant="outlined"
-            margin="normal"
-            label="Confirm Password"
-            required
-            fullWidth
+            helperText={strength?.label}
           />
           <TextField
             id="name"

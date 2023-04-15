@@ -1,19 +1,14 @@
-// has number
 const hasNumber = (number) => new RegExp(/[0-9]/).test(number);
-
-// has mix of small and capitals
 const hasMixed = (number) => new RegExp(/[a-z]/).test(number) && new RegExp(/[A-Z]/).test(number);
-
-// has special chars
 const hasSpecial = (number) => new RegExp(/[!#@$%^&*)(+=._-]/).test(number);
 
 // set color based on password strength
-export const strengthColor = (count) => {
-    if (count < 2) return { label: 'Poor', color: "#f44336" };
-    if (count < 3) return { label: 'Weak', color: "#ffc107" };
-    if (count < 4) return { label: 'Normal', color: "#ffab91" };
-    if (count < 5) return { label: 'Good', color: "#00e676" };
-    if (count < 6) return { label: 'Strong', color: "#00c853" };
+export const strengthColor = (level) => {
+    if (level < 2) return { label: 'Poor', color: "#f44336" };
+    if (level < 3) return { label: 'Weak', color: "#ffc107" };
+    if (level < 4) return { label: 'Normal', color: "#ffab91" };
+    if (level < 5) return { label: 'Good', color: "#00e676" };
+    if (level < 6) return { label: 'Strong', color: "#00c853" };
     return { label: 'Poor', color: "#f44336" };
 };
 

@@ -15,20 +15,24 @@ export function call(api, method, request) {
   };
   if (request) options.body = JSON.stringify(request);
 
-  return fetch(options.url, options).then((response) => {
-    if (response.status === 200) {
-      return response.json();
-    } else if (response.status === 403) {
-      window.location.href = "/signin"; // redirect
-    } else if (response.status === 400) {
-      alert("입력 정보를 확인해 주십시오.");
-    } else {
-      new Error(response);
-    }
-  }).catch((error) => {
-    console.log("http error");
-    console.log(error);
-  });
+  return fetch(options.url, options)
+          .then((response) => {
+            switch(response.status) {
+              case 200:
+                return response.json();
+              case 400:
+              case 403:
+                window.location.href = "/signin";
+                // alert("입력 정보를 확인해 주십시오.");
+                break;
+              default:
+                new Error(response);
+            }
+          })
+          .catch((error) => {
+            console.log("http error");
+            console.log(error);
+          });
 }
 
 export function signIn(userDTO) {
