@@ -45,12 +45,10 @@ function SignUp() {
     >
       <Box
         sx={{
-          marginTop: 8,
           display: 'flex',
           flexDirection: 'column',
           alignItems: 'center',
         }}
-        noValidate
       >
         <Avatar sx={{ m: 1, bgcolor: 'black' }}>
           <PersonAdd />

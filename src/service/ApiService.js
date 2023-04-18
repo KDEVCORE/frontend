@@ -6,7 +6,10 @@ export function call(api, method, request) {
   });
 
   const accessToken = localStorage.getItem("ACCESS_TOKEN");
-  if (accessToken && accessToken !== null) headers.append("Authorization", "Bearer " + accessToken);
+  if (accessToken && accessToken !== null) {
+    headers.append("Authorization", "Bearer " + accessToken);
+
+  }
 
   let options = {
     headers: headers,
@@ -40,13 +43,13 @@ export function signIn(userDTO) {
           .then((response) => {
             if (response.token) {
               localStorage.setItem("ACCESS_TOKEN", response.token);
-              window.location.href = "/";
+              window.location.href = "/todo";
           }});
 }
 
 export function signOut() {
-  localStorage.setItem("ACCESS_TOKEN", null);
-  window.location.href = "/signin";
+  localStorage.removeItem("ACCESS_TOKEN");
+  window.location.href = "/";
 }
 
 export function signUp(userDTO) {
@@ -56,4 +59,9 @@ export function signUp(userDTO) {
 export function signInOAuth2(provider) {
   const FRONTEND_URL = window.location.protocol + "//" + window.location.host;
   window.location.href = API_BASE_URL + "/oauth2/authorization/" + provider + "?redirect_uri=" + FRONTEND_URL
+}
+
+export function getAuthStatus() {
+  const accessToken =  localStorage.getItem("ACCESS_TOKEN");
+  return accessToken && accessToken !== null ? true : false;
 }
