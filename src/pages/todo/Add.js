@@ -3,16 +3,34 @@ import { Box, Button, InputAdornment, TextField } from "@mui/material";
 import React, { useState } from "react";
 
 const Add = (props) => {
-  const [item, setItem] = useState({ title: "", progress: 0 });
+  const [item, setItem] = useState({
+    title: "",
+    done: false,
+    progress: 0,
+    priority: 1,
+    stress: 3,
+    deadline: null,
+    createdDate: null,
+    updatedDate: null,
+  });
   const addItem = props.addItem;
 
   const onButtonClick = () => {
     addItem(item);
-    setItem({ title: "" });
+    setItem({
+      title: "",
+      done: false,
+      progress: 0,
+      priority: 1,
+      stress: 3,
+      deadline: null,
+      createdDate: null,
+      updatedDate: null,
+    });
   };
 
   const onInputChange = (e) => {
-    setItem({ title: e.target.value });
+    setItem({...item, title: e.target.value, deadline: new Date() });
   };
 
   const enterKeyEventHandler = (e) => {
@@ -20,8 +38,13 @@ const Add = (props) => {
   };
 
   return (
-    <Box marginTop={2}>
+    <Box
+      sx={{
+        my: 2,
+      }}
+    >
       <TextField
+        disabled={props.loading ? true : false}
         label="Add Todo"
         fullWidth
         variant="outlined"
@@ -30,7 +53,7 @@ const Add = (props) => {
         value={item.title}
         InputProps={{
           endAdornment:
-            <InputAdornment position="start">
+            <InputAdornment position="end">
               <Button
                 fullWidth
                 variant="contained"

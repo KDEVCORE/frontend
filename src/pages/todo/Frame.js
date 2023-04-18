@@ -1,8 +1,8 @@
-import { Box, CircularProgress, List, Paper } from "@mui/material";
+import { Box, CircularProgress, Paper } from "@mui/material";
 import { useEffect, useState } from "react";
+import { call } from "../../service/ApiService";
 import TodoAdd from "./Add";
 import TodoList from "./List";
-import { call } from "../../service/ApiService";
 
 function Frame() {
   const [items, setItems] = useState([]);
@@ -16,6 +16,7 @@ function Frame() {
   }, []);
 
   const addItem = (item) => {
+    console.log(item);
     call("/todo", "POST", item)
       .then((response) => setItems(response.data));
   };
@@ -30,50 +31,40 @@ function Frame() {
       .then((response) => setItems(response.data));
   };
 
-  let todoItems = items.length > 0 && (
-    <List>
-      {items.map((item) => (
-        <TodoList
+  let todoListPage = (
+    <Paper
+      elevation={0}
+      sx={{
+        my: 2,
+      }}
+    >
+      {items.length > 0 &&
+        (items.map((item) => (
+          <TodoList
           item={item}
           key={item.uuid}
           editItem={editItem}
           deleteItem={deleteItem}
-        />
-      ))}
-    </List>
-  );
-
-  // let navigationBar = (
-  //   <AppBar position="static">
-  //     <Toolbar>
-  //       <Grid justifyContent="space-between" container>
-  //         <Grid item>
-  //           <Typography variant="h6">MAIN</Typography>
-  //         </Grid>
-  //         <Grid item>
-  //           <Button color="inherit" onClick={signOut}>
-  //             로그아웃
-  //           </Button>
-  //         </Grid>
-  //       </Grid>
-  //     </Toolbar>
-  //   </AppBar>
-  // );
-
-  let todoListPage = (
-    <Paper style={{ margin: 16 }}>
-      <TodoAdd addItem={addItem} />
-      {todoItems}
+          />
+          )))
+        }
     </Paper>
   );
-
-  let loadingPage = (
-    <Box margin={5} textAlign={"center"}>
-      <CircularProgress size={150} />
+  
+  let loadingAnimation = (
+    <Box margin={6} textAlign={"center"}>
+      <CircularProgress size={100} />
     </Box>
   );
-
-  return <Box textAlign={"center"}>{!loading ? todoListPage : loadingPage}</Box>;
+  
+  return (
+    <Box
+    textAlign={"center"}
+    >
+      <TodoAdd addItem={addItem} loading={loading} />
+      {!loading ? todoListPage : loadingAnimation}
+    </Box>
+  );
 }
 
 export default Frame;

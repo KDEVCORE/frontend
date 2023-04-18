@@ -17,12 +17,11 @@ function IntroHero () {
             }}
         >
             <Paper
-                component="h3"
                 sx={{
                     textAlign: "center",
                 }}
             >
-                <Typography variant="h3">
+                <Typography variant="h2">
                     {"Welcome!"}
                 </Typography>
             </Paper>
