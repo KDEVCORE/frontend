@@ -100,7 +100,7 @@ function AppRouter() {
             }}
         >
             <Box>
-                <AppBar position="static">
+                <AppBar position="static" color="transparent">
                     <Toolbar>
                         <Link
                             href="/"

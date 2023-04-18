@@ -102,7 +102,7 @@ function SignIn() {
               value="google"
               onClick={e => handleSignInOauth2(e.currentTarget.value)}
             >
-              <Avatar variant="circular" src="/static/images/google_g_logo_icon.png" />
+              <Avatar variant="circular" src="/static/images/logo/google_g_logo_icon.png" />
             </Button>
           </Tooltip>
           <Tooltip
@@ -116,7 +116,7 @@ function SignIn() {
               value="kakao"
               onClick={e => handleSignInOauth2(e.currentTarget.value)}
             >
-              <Avatar variant="rounded" src="/static/images/kakaotalk_sharing_btn_small.png" />
+              <Avatar variant="rounded" src="/static/images/logo/kakaotalk_sharing_btn_small.png" />
             </Button>
           </Tooltip>
           <Tooltip
@@ -130,7 +130,7 @@ function SignIn() {
               value="naver"
               onClick={e => handleSignInOauth2(e.currentTarget.value)}
             >
-              <Avatar variant="rounded" src="/static/images/btn_icon_rounded.png" />
+              <Avatar variant="rounded" src="/static/images/logo/btn_icon_rounded.png" />
             </Button>
           </Tooltip>
           <Tooltip
@@ -143,7 +143,7 @@ function SignIn() {
               aria-label="social login button from github"
               value="github"
               onClick={e => handleSignInOauth2(e.currentTarget.value)}>
-              <Avatar variant="circular" src="/static/images/github-mark.png" />
+              <Avatar variant="circular" src="/static/images/logo/github-mark.png" />
             </Button>
           </Tooltip>
         </ButtonGroup>
