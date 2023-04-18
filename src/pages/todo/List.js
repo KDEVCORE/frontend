@@ -2,7 +2,7 @@ import DeleteOutlined from "@mui/icons-material/DeleteOutlined";
 import { Checkbox, IconButton, InputBase, ListItem, ListItemSecondaryAction, ListItemText } from "@mui/material";
 import React, { useState } from "react";
 
-const Todo = (props) => {
+const List = (props) => {
   const [item, setItem] = useState(props.item);
   const [readOnly, setReadOnly] = useState(true);
   const deleteItem = props.deleteItem;
@@ -64,4 +64,4 @@ const Todo = (props) => {
   );
 };
 
-export default Todo;
+export default List;

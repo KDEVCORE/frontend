@@ -1,10 +1,10 @@
-import { AppBar, Box, Button, CircularProgress, Grid, List, Paper, Toolbar, Typography } from "@mui/material";
+import { Box, CircularProgress, List, Paper } from "@mui/material";
 import { useEffect, useState } from "react";
-import AddTodo from "./pages/todo/AddTodo";
-import Todo from "./pages/todo/Todo";
-import { call, signOut } from "./service/ApiService";
+import TodoAdd from "./Add";
+import TodoList from "./List";
+import { call } from "../../service/ApiService";
 
-function App() {
+function Frame() {
   const [items, setItems] = useState([]);
   const [loading, setLoading] = useState(true);
 
@@ -33,7 +33,7 @@ function App() {
   let todoItems = items.length > 0 && (
     <List>
       {items.map((item) => (
-        <Todo
+        <TodoList
           item={item}
           key={item.uuid}
           editItem={editItem}
@@ -43,27 +43,26 @@ function App() {
     </List>
   );
 
-  let navigationBar = (
-    <AppBar position="static">
-      <Toolbar>
-        <Grid justifyContent="space-between" container>
-          <Grid item>
-            <Typography variant="h6">MAIN</Typography>
-          </Grid>
-          <Grid item>
-            <Button color="inherit" onClick={signOut}>
-              로그아웃
-            </Button>
-          </Grid>
-        </Grid>
-      </Toolbar>
-    </AppBar>
-  );
+  // let navigationBar = (
+  //   <AppBar position="static">
+  //     <Toolbar>
+  //       <Grid justifyContent="space-between" container>
+  //         <Grid item>
+  //           <Typography variant="h6">MAIN</Typography>
+  //         </Grid>
+  //         <Grid item>
+  //           <Button color="inherit" onClick={signOut}>
+  //             로그아웃
+  //           </Button>
+  //         </Grid>
+  //       </Grid>
+  //     </Toolbar>
+  //   </AppBar>
+  // );
 
   let todoListPage = (
     <Paper style={{ margin: 16 }}>
-      {navigationBar}
-      <AddTodo addItem={addItem} />
+      <TodoAdd addItem={addItem} />
       {todoItems}
     </Paper>
   );
@@ -77,4 +76,4 @@ function App() {
   return <Box textAlign={"center"}>{!loading ? todoListPage : loadingPage}</Box>;
 }
 
-export default App;
+export default Frame;

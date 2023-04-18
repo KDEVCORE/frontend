@@ -2,7 +2,7 @@ import { PlaylistAdd } from "@mui/icons-material";
 import { Box, Button, InputAdornment, TextField } from "@mui/material";
 import React, { useState } from "react";
 
-const AddTodo = (props) => {
+const Add = (props) => {
   const [item, setItem] = useState({ title: "", progress: 0 });
   const addItem = props.addItem;
 
@@ -46,4 +46,4 @@ const AddTodo = (props) => {
   );
 };
 
-export default AddTodo;
+export default Add;
