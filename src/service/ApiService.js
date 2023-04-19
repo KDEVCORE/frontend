@@ -19,32 +19,34 @@ export function call(api, method, request) {
   if (request) options.body = JSON.stringify(request);
 
   return fetch(options.url, options)
-          .then((response) => {
-            switch(response.status) {
-              case 200:
-                return response.json();
-              case 400:
-              case 403:
-                window.location.href = "/signin";
-                // alert("입력 정보를 확인해 주십시오.");
-                break;
-              default:
-                new Error(response);
-            }
-          })
-          .catch((error) => {
-            console.log("http error");
-            console.log(error);
-          });
+    .then((response) => {
+      switch (response.status) {
+        case 200:
+          return response.json();
+        case 400:
+        case 403:
+        case 404:
+        case 500:
+          return response.status;
+        default:
+          new Error(response);
+      }
+    })
+    .catch((error) => {
+      console.log("http error");
+      console.log(error);
+    });
 }
 
 export function signIn(userDTO) {
-  return call("/member/signin", "POST", userDTO)
-          .then((response) => {
-            if (response.token) {
-              localStorage.setItem("ACCESS_TOKEN", response.token);
-              window.location.href = "/todo";
-          }});
+  return call("/member/signin", "POST", userDTO).then((response) => {
+    if (response.token) {
+      localStorage.setItem("ACCESS_TOKEN", response.token);
+      window.location.href = "/todo";
+    } else {
+      return response.status;
+    }
+  });
 }
 
 export function signOut() {
@@ -62,6 +64,6 @@ export function signInOAuth2(provider) {
 }
 
 export function getAuthStatus() {
-  const accessToken =  localStorage.getItem("ACCESS_TOKEN");
+  const accessToken = localStorage.getItem("ACCESS_TOKEN");
   return accessToken && accessToken !== null ? true : false;
 }

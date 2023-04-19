@@ -1,20 +1,28 @@
 import { ExitToApp, Security, Visibility, VisibilityOff } from "@mui/icons-material";
-import { Avatar, Box, Button, ButtonGroup, Container, Divider, IconButton, InputAdornment, Paper, TextField, Tooltip, Typography, Zoom } from "@mui/material";
+import { Alert, Avatar, Box, Button, ButtonGroup, Container, Divider, IconButton, InputAdornment, Paper, Snackbar, TextField, Tooltip, Typography, Zoom } from "@mui/material";
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import { signIn, signInOAuth2 } from "../../service/ApiService";
 
 function SignIn() {
   const [showPassword, setShowPassword] = useState(false);
+  const [open, setOpen] = useState(false);
 
   const handleSignIn = (event) => {
     event.preventDefault();
     const data = new FormData(event.target);
-    signIn({ identifier: data.get("identifier"), password: data.get("password") });
+    signIn({ identifier: data.get("identifier"), password: data.get("password") }).then((response) => {
+      if(response !== 200) setOpen(true);
+    });
   };
 
   const handleSignInOauth2 = (provider) => {
     signInOAuth2(provider);
+  };
+
+  const handleClose = (event, reason) => {
+    if (reason === 'clickaway') return;
+    setOpen(false);
   };
 
   return (
@@ -36,6 +44,21 @@ function SignIn() {
           {"SIGN IN"}
         </Typography>
         <form noValidate sx={{ mt: 2 }} onSubmit={handleSignIn}>
+          <Snackbar
+            autoHideDuration={3000}
+            anchorOrigin={{ vertical: "top", horizontal: "center" }}
+            open={open}
+            onClose={handleClose}
+          >
+            <Alert
+              variant="filled"
+              severity="error"
+              sx={{ width: '100%' }}
+              onClose={handleClose}
+            >
+              {"입력 정보를 확인해 주십시오"}
+            </Alert>
+          </Snackbar>
           <TextField
             id="identifier"
             name="identifier"
