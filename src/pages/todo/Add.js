@@ -44,7 +44,6 @@ const Add = (props) => {
       }}
     >
       <TextField
-        disabled={props.loading ? true : false}
         label="Add Todo"
         fullWidth
         variant="outlined"

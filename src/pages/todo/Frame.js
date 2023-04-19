@@ -8,6 +8,9 @@ function Frame() {
   const [items, setItems] = useState([]);
   const [loading, setLoading] = useState(true);
 
+  const accessToken = localStorage.getItem("ACCESS_TOKEN");
+  if(!accessToken || accessToken === null) window.location.href = "/signin";
+
   useEffect(() => {
     call("/todo", "GET", null).then((response) => {
       setItems(response.data);
@@ -31,13 +34,14 @@ function Frame() {
       .then((response) => setItems(response.data));
   };
 
-  let todoListPage = (
+  let todoPage = (
     <Paper
       elevation={0}
       sx={{
         my: 2,
       }}
     >
+      <TodoAdd addItem={addItem} />
       {items.length > 0 &&
         (items.map((item) => (
           <TodoList
@@ -58,11 +62,8 @@ function Frame() {
   );
   
   return (
-    <Box
-    textAlign={"center"}
-    >
-      <TodoAdd addItem={addItem} loading={loading} />
-      {!loading ? todoListPage : loadingAnimation}
+    <Box textAlign={"center"}>
+      {!loading ? todoPage : loadingAnimation}
     </Box>
   );
 }
