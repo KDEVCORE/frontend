@@ -1,6 +1,19 @@
-import { Card, CardContent, Container, Stack, Typography } from "@mui/material";
+import { DeveloperBoard, PowerSettingsNew, VerifiedUserOutlined } from "@mui/icons-material";
+import { Card, CardActionArea, CardContent, Container, Grid, Typography } from "@mui/material";
 
-function IntroTechBack () {
+const item = {
+    display: 'flex',
+    flexDirection: 'column',
+    alignItems: 'center',
+};
+
+const number = {
+    fontSize: {xs: 40, sm: 64, md: 128},
+    fontFamily: 'default',
+    textAlign: "center",
+};
+
+export default function IntroTechBack() {
     return (
         <Container
             component="section"
@@ -8,81 +21,65 @@ function IntroTechBack () {
                 display: "flex",
                 flexDirection: "column",
                 alignItems: "center",
-                backgroundColor: "#44aa44",
+                padding: 4,
             }}
         >
-            <Typography variant="h4" component="h4">
+            <Typography variant="h4">
                 {"Back-End"}
             </Typography>
-            <Stack
-                spacing={{ xs: 1, sm: 2, md: 4 }}
-                direction={{ sm: 'column', md: 'row' }}
-                sx={{ margin: 1, justifyContent: "center", textAlign: "center" }}
+            <Grid
+                container
+                spacing={5}
+                sx={{
+                    justifyContent: "center",
+                }}
             >
-                <Card>
-                    <CardContent>
-                    <Typography gutterBottom variant="h5">
-                        {"Spring Boot"}
-                    </Typography>
-                    </CardContent>
-                </Card>
-                <Card>
-                    <CardContent>
-                    <Typography gutterBottom variant="h5">
-                        {"Spring Security"}
-                    </Typography>
-                    </CardContent>
-                </Card>
-                <Card>
-                    <CardContent>
-                    <Typography gutterBottom variant="h5">
-                        {"Spring Data JPA"}
-                    </Typography>
-                    </CardContent>
-                </Card>
-            </Stack>
-            <Stack
-                spacing={{ xs: 1, sm: 2, md: 4 }}
-                direction={{ sm: 'column', md: 'row' }}
-                sx={{ margin: 1, justifyContent: "center", textAlign: "center" }}
-            >
-                <Card>
-                    <CardContent>
-                    <Typography gutterBottom variant="h5">
-                        {"JWT(JSON Web Token)"}
-                    </Typography>
-                    </CardContent>
-                </Card>
-                <Card>
-                    <CardContent>
-                    <Typography gutterBottom variant="h5">
-                        {"OAuth 2"}
-                    </Typography>
-                    </CardContent>
-                </Card>
-            </Stack>
-            <Stack
-                spacing={{ xs: 1, sm: 2, md: 4 }}
-                direction={{ sm: 'column', md: 'row' }}
-                sx={{ margin: 1, justifyContent: "center", textAlign: "center" }}
-            >
-                <Card>
-                    <CardContent>
-                    <Typography gutterBottom variant="h5">
-                        {"RESTful API"}
-                    </Typography>
-                    </CardContent>
-                </Card>
-                <Card>
-                    <CardContent>
-                    <Typography gutterBottom variant="h5">
-                        {"Layered System"}
-                    </Typography>
-                    </CardContent>
-                </Card>
-            </Stack>
+                <Grid item xs={12} md={4}>
+                    <Card sx={item} elevation={4}>
+                        <CardActionArea sx={number}>
+                            <CardContent>
+                                <PowerSettingsNew sx={{ fontSize: {xs: 40, sm: 64, md: 128} }} />
+                                <Typography variant="h4">
+                                    {"Spring Boot"}
+                                </Typography>
+                                <Typography variant="body1">
+                                    {"Spring Security, Spring Data JPA"}
+                                </Typography>
+                            </CardContent>
+                        </CardActionArea>
+                    </Card>
+                </Grid>
+                <Grid item xs={12} md={4}>
+                    <Card sx={item}>
+                        <CardActionArea>
+                            <CardContent sx={number}>
+                                <VerifiedUserOutlined sx={{ fontSize: {xs: 40, sm: 64, md: 128} }} />
+                                <Typography variant="h4">
+                                    {"Authentication"}
+                                </Typography>
+                                <Typography variant="body1">
+                                    {"JWT(JSON Web Token), OAuth 2"}
+                                </Typography>
+                            </CardContent>
+                        </CardActionArea>
+                    </Card>
+                </Grid>
+                <Grid item xs={12} md={4}>
+                    <Card sx={item}>
+                        <CardActionArea>
+                            <CardContent sx={number}>
+                                <DeveloperBoard sx={{ fontSize: {xs: 40, sm: 64, md: 128} }} />
+                                <Typography variant="h4">
+                                    {"Structure"}
+                                </Typography>
+                                <Typography variant="body1">
+                                    {"REST API, Layered System"}
+                                </Typography>
+                            </CardContent>
+                        </CardActionArea>
+                    </Card>
+                </Grid>
+            </Grid>
         </Container>
     );
 }
-
-export default IntroTechBack;

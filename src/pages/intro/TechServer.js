@@ -1,6 +1,20 @@
-import { Card, CardContent, Container, Stack, Typography } from "@mui/material";
+import { StorageOutlined } from "@mui/icons-material";
+import { Card, CardActionArea, CardContent, Container, Grid, Typography } from "@mui/material";
 
-function IntroTechServer () {
+const item = {
+    display: 'flex',
+    flexDirection: 'column',
+    alignItems: 'center',
+    justifyContent: "center",
+};
+
+const number = {
+    fontSize: {xs: 40, sm: 64, md: 128},
+    fontFamily: 'default',
+    textAlign: "center",
+};
+
+export default function IntroTechServer () {
     return (
         <Container
             component="section"
@@ -8,42 +22,35 @@ function IntroTechServer () {
                 display: "flex",
                 flexDirection: "column",
                 alignItems: "center",
-                backgroundColor: "#aa4444",
+                padding: 4,
             }}
         >
-            <Typography variant="h4" component="h4">
+            <Typography variant="h4">
                 {"Server-Side"}
             </Typography>
-            <Stack
-                gap={2}
-                spacing={{ xs: 1, sm: 2, md: 4 }}
-                direction={{ xs: 'column', sm: 'row' }}
-                sx={{ margin: 1, justifyContent: "center", textAlign: "center" }}
+            <Grid
+                container
+                spacing={5}
+                sx={{
+                    justifyContent: "center",
+                }}
             >
-            <Card>
-                <CardContent>
-                <Typography gutterBottom variant="h5">
-                    AWS EC2
-                </Typography>
-                </CardContent>
-            </Card>
-            <Card>
-                <CardContent>
-                <Typography gutterBottom variant="h5">
-                    AWS Elastic Beanstalk
-                </Typography>
-                </CardContent>
-            </Card>
-            <Card>
-                <CardContent>
-                <Typography gutterBottom variant="h5">
-                    AWS Route 53
-                </Typography>
-                </CardContent>
-            </Card>
-            </Stack>
+                <Grid item xs={12} md={4}>
+                    <Card sx={item} elevation={4}>
+                        <CardActionArea sx={number}>
+                            <CardContent>
+                                <StorageOutlined sx={{ fontSize: {xs: 40, sm: 64, md: 128} }} />
+                                <Typography variant="h4">
+                                    {"AWS EC2"}
+                                </Typography>
+                                <Typography variant="body1">
+                                    {"Elastic Beanstalk, Route 53, RDS, S3"}
+                                </Typography>
+                            </CardContent>
+                        </CardActionArea>
+                    </Card>
+                </Grid>
+            </Grid>
         </Container>
     );
 }
-
-export default IntroTechServer;

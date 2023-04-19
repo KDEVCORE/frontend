@@ -1,6 +1,19 @@
-import { Card, CardContent, Container, Stack, Typography } from "@mui/material";
+import { HubOutlined, JavascriptOutlined, WidgetsOutlined } from "@mui/icons-material";
+import { Card, CardActionArea, CardContent, Container, Grid, Typography } from "@mui/material";
 
-function IntroTechFront () {
+const item = {
+    display: 'flex',
+    flexDirection: 'column',
+    alignItems: 'center',
+};
+
+const number = {
+    fontSize: {xs: 40, sm: 64, md: 128},
+    fontFamily: 'default',
+    textAlign: "center",
+};
+
+export default function IntroTechFront () {
     return (
         <Container
             component="section"
@@ -8,42 +21,56 @@ function IntroTechFront () {
                 display: "flex",
                 flexDirection: "column",
                 alignItems: "center",
-                backgroundColor: "#4444aa",
+                padding: 4,
             }}
         >
-            <Typography variant="h4" component="h4">
+            <Typography variant="h4">
                 {"Front-End"}
             </Typography>
-            <Stack
-                gap={2}
-                spacing={{ xs: 1, sm: 2, md: 4 }}
-                direction={{ xs: 'column', sm: 'row' }}
-                sx={{ margin: 1, justifyContent: "center", textAlign: "center" }}
+            <Grid
+                container
+                spacing={5}
+                sx={{
+                    justifyContent: "center",
+                }}
             >
-            <Card>
-                <CardContent>
-                <Typography gutterBottom variant="h5">
-                    React
-                </Typography>
-                </CardContent>
-            </Card>
-            <Card>
-                <CardContent>
-                <Typography gutterBottom variant="h5">
-                    Javascript
-                </Typography>
-                </CardContent>
-            </Card>
-            <Card>
-                <CardContent>
-                <Typography gutterBottom variant="h5">
-                    MUI
-                </Typography>
-                </CardContent>
-            </Card>
-            </Stack>
+                <Grid item xs={12} md={4}>
+                    <Card sx={item} elevation={4}>
+                        <CardActionArea sx={number}>
+                            <CardContent>
+                                <HubOutlined sx={{ fontSize: {xs: 40, sm: 64, md: 128} }} />
+                                <Typography variant="h4">
+                                    {"React"}
+                                </Typography>
+                            </CardContent>
+                        </CardActionArea>
+                    </Card>
+                </Grid>
+                <Grid item xs={12} md={4}>
+                    <Card sx={item}>
+                        <CardActionArea>
+                            <CardContent sx={number}>
+                                <JavascriptOutlined sx={{ fontSize: {xs: 40, sm: 64, md: 128} }} />
+                                <Typography variant="h4">
+                                    {"Javascript"}
+                                </Typography>
+                            </CardContent>
+                        </CardActionArea>
+                    </Card>
+                </Grid>
+                <Grid item xs={12} md={4}>
+                    <Card sx={item}>
+                        <CardActionArea>
+                            <CardContent sx={number}>
+                                <WidgetsOutlined sx={{ fontSize: {xs: 40, sm: 64, md: 128} }} />
+                                <Typography variant="h4">
+                                    {"MUI"}
+                                </Typography>
+                            </CardContent>
+                        </CardActionArea>
+                    </Card>
+                </Grid>
+            </Grid>
         </Container>
     );
 }
-
-export default IntroTechFront;
