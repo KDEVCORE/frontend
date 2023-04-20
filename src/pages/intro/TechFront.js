@@ -38,7 +38,7 @@ export default function IntroTechFront () {
                 }}
             >
                 <Grid item xs={12} md={4}>
-                    <Card sx={item} elevation={4}>
+                    <Card sx={item} elevation={10}>
                         <CardActionArea sx={number}>
                             <CardContent>
                                 <HubOutlined sx={{ fontSize: {xs: 40, sm: 64, md: 128} }} />
@@ -50,7 +50,7 @@ export default function IntroTechFront () {
                     </Card>
                 </Grid>
                 <Grid item xs={12} md={4}>
-                    <Card sx={item}>
+                    <Card sx={item} elevation={10}>
                         <CardActionArea>
                             <CardContent sx={number}>
                                 <JavascriptOutlined sx={{ fontSize: {xs: 40, sm: 64, md: 128} }} />
@@ -62,7 +62,7 @@ export default function IntroTechFront () {
                     </Card>
                 </Grid>
                 <Grid item xs={12} md={4}>
-                    <Card sx={item}>
+                    <Card sx={item} elevation={10}>
                         <CardActionArea>
                             <CardContent sx={number}>
                                 <WidgetsOutlined sx={{ fontSize: {xs: 40, sm: 64, md: 128} }} />

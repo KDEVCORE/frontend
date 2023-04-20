@@ -39,7 +39,7 @@ export default function IntroTechServer () {
                 }}
             >
                 <Grid item xs={12} md={4}>
-                    <Card sx={item} elevation={4}>
+                    <Card sx={item} elevation={10}>
                         <CardActionArea sx={number}>
                             <CardContent>
                                 <StorageOutlined sx={{ fontSize: {xs: 40, sm: 64, md: 128} }} />

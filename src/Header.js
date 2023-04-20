@@ -1,4 +1,4 @@
-import { AccountCircle, ExitToApp, Home, ManageAccounts } from "@mui/icons-material";
+import { AccountCircle, ExitToApp, Home } from "@mui/icons-material";
 import { AppBar, Box, Divider, FormControlLabel, IconButton, Link, Menu, MenuItem, Switch, Toolbar, Tooltip, Typography, useScrollTrigger } from "@mui/material";
 import PropTypes from 'prop-types';
 import { cloneElement, Fragment, useState } from "react";
@@ -54,11 +54,13 @@ const Header = (props) => {
                             flexGrow: 1,
                         }}
                     />
-                    <FormControlLabel
-                        control={<Switch readOnly checked={getAuthStatus()} />}
-                        label="Authentication"
-                        labelPlacement="top"
-                    />
+                    <Tooltip title="Show authentication status (read only)" placement="bottom">
+                        <FormControlLabel
+                            control={<Switch readOnly checked={getAuthStatus()} />}
+                            label="Authentication"
+                            labelPlacement="top"
+                        />
+                    </Tooltip>
                     <Box>
                         {getAuthStatus() && (
                             <Fragment>
@@ -92,9 +94,9 @@ const Header = (props) => {
                                     onClose={handleClose}
                                 >
                                     <MenuItem>
-                                        <IconButton component="a" href="/profile" variant="button">
-                                            <ManageAccounts /> {"profile"}
-                                        </IconButton>
+                                        <Link href="/profile" underline="none" variant="button">
+                                            {"profile"}
+                                        </Link>
                                     </MenuItem>
                                     <Divider />
                                     <MenuItem onClick={signOut}>
