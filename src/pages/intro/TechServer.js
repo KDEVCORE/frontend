@@ -1,5 +1,5 @@
 import { StorageOutlined } from "@mui/icons-material";
-import { Card, CardActionArea, CardContent, Container, Grid, Typography } from "@mui/material";
+import { Box, Card, CardActionArea, CardContent, Container, Grid, Typography } from "@mui/material";
 
 const item = {
     display: 'flex',
@@ -23,11 +23,14 @@ export default function IntroTechServer () {
                 flexDirection: "column",
                 alignItems: "center",
                 padding: 4,
+                my: 2,
             }}
         >
-            <Typography variant="h4">
-                {"Server-Side"}
-            </Typography>
+            <Box sx={{ mb: 6 }}>
+                <Typography variant="h4">
+                    {"Server-Side"}
+                </Typography>
+            </Box>
             <Grid
                 container
                 spacing={5}
@@ -44,7 +47,7 @@ export default function IntroTechServer () {
                                     {"AWS EC2"}
                                 </Typography>
                                 <Typography variant="body1">
-                                    {"Elastic Beanstalk, Route 53, RDS, S3"}
+                                    {"Elastic Beanstalk, Route 53"}
                                 </Typography>
                             </CardContent>
                         </CardActionArea>

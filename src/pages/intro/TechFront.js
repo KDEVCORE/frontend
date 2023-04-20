@@ -1,5 +1,5 @@
 import { HubOutlined, JavascriptOutlined, WidgetsOutlined } from "@mui/icons-material";
-import { Card, CardActionArea, CardContent, Container, Grid, Typography } from "@mui/material";
+import { Box, Card, CardActionArea, CardContent, Container, Grid, Typography } from "@mui/material";
 
 const item = {
     display: 'flex',
@@ -22,11 +22,14 @@ export default function IntroTechFront () {
                 flexDirection: "column",
                 alignItems: "center",
                 padding: 4,
+                my: 2,
             }}
         >
-            <Typography variant="h4">
-                {"Front-End"}
-            </Typography>
+            <Box sx={{ mb: 6 }}>
+                <Typography variant="h4">
+                    {"Front-End"}
+                </Typography>
+            </Box>
             <Grid
                 container
                 spacing={5}
