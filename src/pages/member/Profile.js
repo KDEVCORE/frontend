@@ -1,12 +1,11 @@
-import { PersonAdd, Publish, Visibility, VisibilityOff } from "@mui/icons-material";
-import { Alert, Avatar, Box, Button, Container, IconButton, InputAdornment, Paper, Snackbar, TextField, Typography } from "@mui/material";
-import React, { useState } from "react";
-import { Link } from "react-router-dom";
-import { call, signUp } from "../../service/ApiService";
+import { ManageAccounts, Publish, Visibility, VisibilityOff } from "@mui/icons-material";
+import { Alert, Avatar, Box, Button, Container, IconButton, InputAdornment, Snackbar, TextField, Typography } from "@mui/material";
+import { useState } from "react";
+import { call } from "../../service/ApiService";
 import { strengthColor, strengthIndicator } from "../../utils/password-strength";
 
-export default function SignUp() {
-  const [showPassword, setShowPassword] = useState(false);
+export default function Profile() {
+    const [showPassword, setShowPassword] = useState(false);
   const [checkIdMsg, setCheckIdMsg] = useState();
   const [strength, setStrength] = useState();
   const [open, setOpen] = useState(false);
@@ -45,15 +44,15 @@ export default function SignUp() {
       setOpen(true);
       return;
     }
-    const dto = {
-      identifier: data.get("identifier"),
-      password: data.get("password"),
-      name: data.get("name"),
-      email: data.get("email")
-    };
-    signUp(dto).then((response) => {
-      window.location.href = "/signin";
-    });
+    // const dto = {
+    //   identifier: data.get("identifier"),
+    //   password: data.get("password"),
+    //   name: data.get("name"),
+    //   email: data.get("email")
+    // };
+    // signUp(dto).then((response) => {
+    //   window.location.href = "/signin";
+    // });
   };
 
   const handleClose = (event, reason) => {
@@ -74,7 +73,7 @@ export default function SignUp() {
         }}
       >
         <Avatar sx={{ m: 1, bgcolor: 'black' }}>
-          <PersonAdd />
+          <ManageAccounts />
         </Avatar>
         <Typography variant="h4">
           {"SIGN UP"}
@@ -162,12 +161,6 @@ export default function SignUp() {
           </Button>
         </form>
       </Box>
-      <Paper
-        sx={{ mt: 2, p: 1, textAlign: "center" }}
-        elevation={4}
-      >
-        <Link to="/signin">{"이미 계정이 있습니까? 돌아가 로그인 하세요."}</Link>
-      </Paper>
     </Container>
   );
 }

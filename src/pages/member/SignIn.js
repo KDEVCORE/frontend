@@ -4,7 +4,7 @@ import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import { signIn, signInOAuth2 } from "../../service/ApiService";
 
-function SignIn() {
+export default function SignIn() {
   const [showPassword, setShowPassword] = useState(false);
   const [open, setOpen] = useState(false);
 
@@ -174,5 +174,3 @@ function SignIn() {
     </Container>
   );
 }
-
-export default SignIn;

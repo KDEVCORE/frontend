@@ -1,5 +1,5 @@
 import { Delete, ExpandMore, SentimentDissatisfied, SentimentSatisfied, SentimentSatisfiedAlt, SentimentVeryDissatisfied, SentimentVerySatisfied } from "@mui/icons-material";
-import { Accordion, AccordionDetails, AccordionSummary, Checkbox, Grid, IconButton, Rating, Slider, TextField, Typography } from "@mui/material";
+import { Accordion, AccordionDetails, AccordionSummary, Button, Checkbox, Grid, IconButton, Rating, Slider, TextField, Typography } from "@mui/material";
 import { styled } from '@mui/material/styles';
 import PropTypes from 'prop-types';
 import React, { useState } from "react";
@@ -63,7 +63,7 @@ const List = (props) => {
         setItem({ ...item, stress: Number(e.target.value) });
         break;
       case "deadline":
-        setItem({ ...item, deadline: e.target.value });
+        setItem({ ...item, deadline: Date(e.target.value) });
         break;
       default:
         setItem({ ...item });
@@ -157,19 +157,30 @@ const List = (props) => {
         </Grid>
         <Grid container spacing={{ sm: 2, md: 4 }} columns={{ sm: 6, md: 12 }}>
           <Grid item sm={2} md={4}>
-            <Typography>
-              {"created: " + item.createdDate}
-            </Typography>
+              <Button
+                label="Created Date"
+                name="createdDate"
+                readOnly
+              >
+                {item.createdDate}
+                </Button>
           </Grid>
           <Grid item sm={2} md={4}>
-            <Typography>
-              {"updated: " + item.updatedDate}
-            </Typography>
+            <Button
+                label="Updated Date"
+                name="updatedDate"
+                readOnly
+              >
+              {item.updatedDate}
+            </Button>
           </Grid>
           <Grid item sm={2} md={4}>
-            <Typography>
-              {"deadline: " + item.deadline}
-            </Typography>
+              <Button
+                label="Deadline Date"
+                name="deadline"
+              >
+                {item.deadline}
+                </Button>
           </Grid>
         </Grid>
       </AccordionDetails>

@@ -25,8 +25,8 @@ export function call(api, method, request) {
           return response.json();
         case 400:
         case 403:
-        case 404:
         case 500:
+        case 502:
           return response.status;
         default:
           new Error(response);
