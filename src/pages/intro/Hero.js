@@ -1,4 +1,4 @@
-import { Button, Container, Divider, Typography } from "@mui/material";
+import { Button, Container, Divider, Link, Typography } from "@mui/material";
 import { Box } from "@mui/system";
 
 const HeroBackgroundImage = "/static/images/background/Black_and_White_MOKOKO.jpg";
@@ -58,11 +58,19 @@ export default function IntroHero () {
                     {"Or click the 'GET STARTED' button below to experience main content."}
                 </Typography>
             </Box>
-            <Button variant="contained" color="warning" sx={{ mb: 8 }}>
-                <Typography variant="button">
+            <Link
+                href="/todo"
+                underline="none"
+                variant="button"
+            >
+                <Button
+                    variant="contained"
+                    color="info"
+                    sx={{ mb: 8 }}
+                >
                     {"get started"}
-                </Typography>
-            </Button>
+                </Button>
+            </Link>
         </Container>
     );
 }
