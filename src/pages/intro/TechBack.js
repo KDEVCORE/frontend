@@ -1,5 +1,6 @@
-import { DeveloperBoard, PowerSettingsNew, VerifiedUserOutlined } from "@mui/icons-material";
-import { Box, Card, CardActionArea, CardContent, Container, Grid, Typography } from "@mui/material";
+import { Check, DeveloperBoard, PowerSettingsNew, VerifiedUserOutlined } from "@mui/icons-material";
+import { Button, Card, CardActionArea, CardContent, Container, Dialog, DialogActions, DialogContent, DialogContentText, DialogTitle, Grid, List, ListItem, ListItemIcon, ListItemText, Typography } from "@mui/material";
+import { useState } from "react";
 
 const item = {
     display: 'flex',
@@ -8,12 +9,32 @@ const item = {
 };
 
 const number = {
-    fontSize: {xs: 40, sm: 64, md: 128},
+    fontSize: { xs: 40, sm: 64, md: 128 },
     fontFamily: 'default',
     textAlign: "center",
 };
 
 export default function IntroTechBack() {
+    const [open1, setOpen1] = useState(false);
+    const [open2, setOpen2] = useState(false);
+    const [open3, setOpen3] = useState(false);
+
+    const handleClickOpen1 = () => {
+        setOpen1(true);
+    };
+    const handleClickOpen2 = () => {
+        setOpen2(true);
+    };
+    const handleClickOpen3 = () => {
+        setOpen3(true);
+    };
+
+    const handleClose = () => {
+        setOpen1(false);
+        setOpen2(false);
+        setOpen3(false);
+    };
+
     return (
         <Container
             component="section"
@@ -25,11 +46,17 @@ export default function IntroTechBack() {
                 my: 2,
             }}
         >
-            <Box sx={{ mb: 6 }}>
-                <Typography variant="h4">
-                    {"Back-End"}
+            <Button variant="text" disabled>
+                <Typography
+                    variant="button"
+                    sx={{
+                        fontSize: { sm: 32, md: 64 },
+                        fontFamily: { color: "black", textDecorationLine: "underline" }
+                    }}
+                >
+                    {"back-end"}
                 </Typography>
-            </Box>
+            </Button>
             <Grid
                 container
                 spacing={5}
@@ -39,47 +66,177 @@ export default function IntroTechBack() {
             >
                 <Grid item xs={12} md={4}>
                     <Card sx={item} elevation={10}>
-                        <CardActionArea sx={number}>
-                            <CardContent>
-                                <PowerSettingsNew sx={{ fontSize: {xs: 40, sm: 64, md: 128} }} />
-                                <Typography variant="h4">
-                                    {"Spring Boot"}
-                                </Typography>
-                                <Typography variant="body1">
-                                    {"Spring Security, Spring Data JPA"}
-                                </Typography>
-                            </CardContent>
-                        </CardActionArea>
-                    </Card>
-                </Grid>
-                <Grid item xs={12} md={4}>
-                    <Card sx={item} elevation={10}>
-                        <CardActionArea>
+                        <CardActionArea onClick={handleClickOpen2}>
                             <CardContent sx={number}>
-                                <VerifiedUserOutlined sx={{ fontSize: {xs: 40, sm: 64, md: 128} }} />
+                                <VerifiedUserOutlined sx={{ fontSize: { xs: 40, sm: 64, md: 128 } }} />
                                 <Typography variant="h4">
                                     {"Authentication"}
                                 </Typography>
-                                <Typography variant="body1">
-                                    {"JWT(JSON Web Token), OAuth 2"}
-                                </Typography>
                             </CardContent>
                         </CardActionArea>
+                        <Dialog
+                            open={open2}
+                            onClose={handleClose}
+                            aria-labelledby="alert-dialog-title"
+                            aria-describedby="alert-dialog-description"
+                        >
+                            <DialogTitle id="alert-dialog-title">
+                                {"BACK-END"}
+                            </DialogTitle>
+                            <DialogContent>
+                                <DialogContentText id="alert-dialog-description">
+                                    <List>
+                                        <ListItem>
+                                            <ListItemText
+                                                primary={"Authentication"}
+                                                secondary={"인증 방식은 JWT. 회원 로그인은 ID/Password 판별, SSO 로그인은 OAuth 2 방식을 도입하여 구현했습니다."}
+                                            />
+                                        </ListItem>
+                                        <ListItem>
+                                            <ListItemIcon>
+                                                <Check />
+                                            </ListItemIcon>
+                                            <ListItemText
+                                                primary={"JWT(JSON Web Token)"}
+                                            />
+                                        </ListItem>
+                                        <ListItem>
+                                            <ListItemIcon>
+                                                <Check />
+                                            </ListItemIcon>
+                                            <ListItemText
+                                                primary={"OAuth 2"}
+                                            />
+                                        </ListItem>
+                                        <ListItem>
+                                            <ListItemIcon>
+                                                <Check />
+                                            </ListItemIcon>
+                                            <ListItemText
+                                                primary={"Password Encryption"}
+                                            />
+                                        </ListItem>
+                                    </List>
+                                </DialogContentText>
+                            </DialogContent>
+                            <DialogActions>
+                                <Button onClick={handleClose} autoFocus>{"Close"}</Button>
+                            </DialogActions>
+                        </Dialog>
                     </Card>
                 </Grid>
                 <Grid item xs={12} md={4}>
                     <Card sx={item} elevation={10}>
-                        <CardActionArea>
+                        <CardActionArea onClick={handleClickOpen1}>
                             <CardContent sx={number}>
-                                <DeveloperBoard sx={{ fontSize: {xs: 40, sm: 64, md: 128} }} />
+                                <PowerSettingsNew sx={{ fontSize: { xs: 40, sm: 64, md: 128 } }} />
                                 <Typography variant="h4">
-                                    {"Structure"}
-                                </Typography>
-                                <Typography variant="body1">
-                                    {"REST API, Layered System"}
+                                    {"Spring"}
                                 </Typography>
                             </CardContent>
                         </CardActionArea>
+                        <Dialog
+                            open={open1}
+                            onClose={handleClose}
+                            aria-labelledby="alert-dialog-title"
+                            aria-describedby="alert-dialog-description"
+                        >
+                            <DialogTitle id="alert-dialog-title">
+                                {"BACK-END"}
+                            </DialogTitle>
+                            <DialogContent>
+                                <DialogContentText id="alert-dialog-description">
+                                    <List>
+                                        <ListItem>
+                                            <ListItemText
+                                                primary={"Spring"}
+                                                secondary={"Java 프로그래밍을 이용하여, Back-End를 구성할 수 있는 프레임워크를 사용했습니다."}
+                                            />
+                                        </ListItem>
+                                        <ListItem>
+                                            <ListItemIcon>
+                                                <Check />
+                                            </ListItemIcon>
+                                            <ListItemText
+                                                primary={"Spring Boot"}
+                                            />
+                                        </ListItem>
+                                        <ListItem>
+                                            <ListItemIcon>
+                                                <Check />
+                                            </ListItemIcon>
+                                            <ListItemText
+                                                primary={"Spring Security"}
+                                            />
+                                        </ListItem>
+                                        <ListItem>
+                                            <ListItemIcon>
+                                                <Check />
+                                            </ListItemIcon>
+                                            <ListItemText
+                                                primary={"Spring Data JPA"}
+                                            />
+                                        </ListItem>
+                                    </List>
+                                </DialogContentText>
+                            </DialogContent>
+                            <DialogActions>
+                                <Button onClick={handleClose} autoFocus>{"Close"}</Button>
+                            </DialogActions>
+                        </Dialog>
+                    </Card>
+                </Grid>
+                <Grid item xs={12} md={4}>
+                    <Card sx={item} elevation={10}>
+                        <CardActionArea onClick={handleClickOpen3}>
+                            <CardContent sx={number}>
+                                <DeveloperBoard sx={{ fontSize: { xs: 40, sm: 64, md: 128 } }} />
+                                <Typography variant="h4">
+                                    {"Structure"}
+                                </Typography>
+                            </CardContent>
+                        </CardActionArea>
+                        <Dialog
+                            open={open3}
+                            onClose={handleClose}
+                            aria-labelledby="alert-dialog-title"
+                            aria-describedby="alert-dialog-description"
+                        >
+                            <DialogTitle id="alert-dialog-title">
+                                {"BACK-END"}
+                            </DialogTitle>
+                            <DialogContent>
+                                <DialogContentText id="alert-dialog-description">
+                                    <List>
+                                        <ListItem>
+                                            <ListItemText
+                                                primary={"Structure"}
+                                                secondary={"RESTful에 맞게 API를 작성했고, Annotation을 사용하여 계층을 구분한 시스템을 구현했습니다."}
+                                            />
+                                        </ListItem>
+                                        <ListItem>
+                                            <ListItemIcon>
+                                                <Check />
+                                            </ListItemIcon>
+                                            <ListItemText
+                                                primary={"REST API"}
+                                            />
+                                        </ListItem>
+                                        <ListItem>
+                                            <ListItemIcon>
+                                                <Check />
+                                            </ListItemIcon>
+                                            <ListItemText
+                                                primary={"Layered System"}
+                                            />
+                                        </ListItem>
+                                    </List>
+                                </DialogContentText>
+                            </DialogContent>
+                            <DialogActions>
+                                <Button onClick={handleClose} autoFocus>{"Close"}</Button>
+                            </DialogActions>
+                        </Dialog>
                     </Card>
                 </Grid>
             </Grid>

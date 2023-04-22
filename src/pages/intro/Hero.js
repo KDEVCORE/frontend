@@ -20,9 +20,18 @@ export default function IntroHero () {
                 textAlign: "center",
             }}
         >
-            <Typography variant="h2" color="#ffffff" sx={{ mt: 8 }}>
-                {"Welcome!"}
-            </Typography>
+            <Button variant="text" disabled>
+                <Typography
+                    variant="button"
+                    sx={{
+                        mt: 6,
+                        fontSize: { sm: 32, md: 64 },
+                        fontFamily: { color: "white", textDecorationLine: "underline" }
+                    }}
+                >
+                    {"welcome"}
+                </Typography>
+            </Button>
             <Box
                 sx={{
                     my: 4,
@@ -32,30 +41,22 @@ export default function IntroHero () {
                     }
                 }}
             >
+                <Divider />
                 <Typography variant="subtitle1">
-                    {"이 웹사이트는 데모 프로젝트입니다."}
+                    {"이 웹사이트는 데모 프로젝트용입니다."}
+                    {/* {"This website is for a demo project."} */}
                 </Typography>
                 <Typography variant="subtitle1">
                     {"매우 간단한 구조를 가지고 있으며 프런트 엔드의 기능도 축약되어 있습니다."}
+                    {/* {"It has a very simple structure, and the function of the front end is also abbreviated."} */}
                 </Typography>
                 <Typography variant="subtitle1">
                     {"이 웹이 어떻게 작동하는지 궁금하시면 이 페이지를 아래로 스크롤하십시오."}
+                    {/* {"If you're curious about how this web works, please scroll down this page."} */}
                 </Typography>
                 <Typography variant="subtitle1">
-                    {"또는, 아래의 '시작하기' 버튼을 클릭하여 주요 콘텐츠를 경험해 보세요."}
-                </Typography>
-                <Divider />
-                <Typography variant="subtitle1">
-                    {"This website is for a demo project."}
-                </Typography>
-                <Typography variant="subtitle1">
-                    {"It has a very simple structure, and the function of the front end is also abbreviated."}
-                </Typography>
-                <Typography variant="subtitle1">
-                    {"If you're curious about how this web works, please scroll down this page."}
-                </Typography>
-                <Typography variant="subtitle1">
-                    {"Or click the 'GET STARTED' button below to experience main content."}
+                    {"또는 아래의 '시작하기' 버튼을 클릭하여 주요 콘텐츠를 경험해 보세요."}
+                    {/* {"Or click the 'GET STARTED' button below to experience main content."} */}
                 </Typography>
             </Box>
             <Link

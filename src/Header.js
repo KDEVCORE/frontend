@@ -1,5 +1,5 @@
-import { AccountCircle, ExitToApp, Home } from "@mui/icons-material";
-import { AppBar, Box, Divider, FormControlLabel, IconButton, Link, Menu, MenuItem, Switch, Toolbar, Tooltip, Typography, useScrollTrigger } from "@mui/material";
+import { AccountCircle, Block, ExitToApp, Home, Verified } from "@mui/icons-material";
+import { AppBar, Box, Chip, Divider, IconButton, Link, Menu, MenuItem, Toolbar, Tooltip, Typography, useScrollTrigger } from "@mui/material";
 import PropTypes from 'prop-types';
 import { cloneElement, Fragment, useState } from "react";
 import { getAuthStatus, signOut } from "./service/ApiService";
@@ -44,7 +44,9 @@ const Header = (props) => {
                     }}
                 >
                     <IconButton color="inherit" aria-label="home" component="a" href="/">
-                        <Home sx={{ fontSize: { sm: 24, md:48 }}} />
+                        <Tooltip title="HOME" placement="bottom">
+                            <Home sx={{ fontSize: { sm: 24, md:48 }}} />
+                        </Tooltip>
                     </IconButton>
                     <Typography
                         variant="button"
@@ -54,13 +56,12 @@ const Header = (props) => {
                             flexGrow: 1,
                         }}
                     />
-                    <Tooltip title="Show authentication status (read only)" placement="bottom">
-                        <FormControlLabel
-                            control={<Switch readOnly checked={getAuthStatus()} />}
-                            label="Authentication"
-                            labelPlacement="top"
-                        />
-                    </Tooltip>
+                    <Chip
+                        label="Authentication"
+                        color={getAuthStatus() ? "success" : "default"}
+                        icon={getAuthStatus() ? <Verified /> : <Block />}
+                        
+                    />
                     <Box>
                         {getAuthStatus() && (
                             <Fragment>
