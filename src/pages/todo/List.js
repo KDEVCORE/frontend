@@ -1,8 +1,8 @@
-import { Delete, ExpandMore, SentimentDissatisfied, SentimentSatisfied, SentimentSatisfiedAlt, SentimentVeryDissatisfied, SentimentVerySatisfied } from "@mui/icons-material";
-import { Accordion, AccordionDetails, AccordionSummary, Button, Checkbox, Grid, IconButton, Rating, Slider, TextField, Typography } from "@mui/material";
+import { Delete, KeyboardArrowDown, KeyboardArrowUp, SentimentDissatisfied, SentimentSatisfied, SentimentSatisfiedAlt, SentimentVeryDissatisfied, SentimentVerySatisfied } from "@mui/icons-material";
+import { Box, Collapse, IconButton, Rating, Slider, Switch, Table, TableBody, TableCell, TableHead, TableRow, TextField, Tooltip, Typography } from "@mui/material";
 import { styled } from '@mui/material/styles';
 import PropTypes from 'prop-types';
-import React, { useState } from "react";
+import React, { Fragment, useState } from "react";
 
 function IconContainer(props) {
   const { value, ...other } = props;
@@ -44,12 +44,12 @@ const customIcons = {
 
 const List = (props) => {
   const [item, setItem] = useState(props.item);
-  const [readOnly, setReadOnly] = useState(true);
+  const [open, setOpen] = useState(false);
   const deleteItem = props.deleteItem;
   const editItem = props.editItem;
 
   const editEventHandler = (e) => {
-    switch(e.target.name) {
+    switch (e.target.name) {
       case "title":
         setItem({ ...item, title: e.target.value });
         break;
@@ -80,111 +80,116 @@ const List = (props) => {
     deleteItem(item);
   };
 
-  const turnOffReadOnly = () => {
-    setReadOnly(false);
-  };
-
-  const turnOnReadOnly = (e) => {
-    if (e.key === "Enter" && readOnly === false) {
-      setReadOnly(true);
-      editItem(item);
-    }
-  };
-
   return (
-    <Accordion>
-      <AccordionSummary
-        expandIcon={<ExpandMore />}
-      >
-        <Typography>
-          {item.title}
-        </Typography>
-      </AccordionSummary>
-      <AccordionDetails>
-        <Grid container spacing={{ sm: 2, md: 4 }} columns={{ sm: 6, md: 12 }}>
-          <Grid item sm={1} md={1}>
-            <Checkbox checked={item.done} onChange={checkboxEventHandler} />
-          </Grid>
-          <Grid item sm={4} md={10}>
-            <TextField
-              onClick={turnOffReadOnly}
-              onKeyDown={turnOnReadOnly}
-              onChange={editEventHandler}
-              type="text"
-              name="title"
-              value={item.title}
-              multiline
-              fullWidth
-              disabled={readOnly}
-            />
-          </Grid>
-          <Grid item sm={1} md={1}>
+    <Fragment>
+        <TableRow sx={{ '& > *': { borderBottom: 'unset' } }}>
+          <TableCell align="center">
+            {item.title}
+          </TableCell>
+          <TableCell align="center">
+            <Switch checked={item.done} readOnly />
+          </TableCell>
+          <TableCell align="center">
+            {item.progress}
+          </TableCell>
+          <TableCell align="center">
+            {item.priority}
+          </TableCell>
+          <TableCell align="center">
+            {new Date(item.deadline).toLocaleDateString()}
+          </TableCell>
+          <TableCell align="center">
             <IconButton
-              color="error"
-              aria-label="Delete Todo"
-              onClick={deleteEventHandler}
+              aria-label="expand row"
+              onClick={() => setOpen(!open)}
             >
-              <Delete />
+              {open ? <KeyboardArrowUp /> : <KeyboardArrowDown />}
             </IconButton>
-          </Grid>
-        </Grid>
-        <Grid container spacing={{ sm: 2, md: 4 }} columns={{ sm: 6, md: 12 }}>
-          <Grid item sm={2} md={4}>
-            <Typography>
-              {"progress: " + item.progress}
-            </Typography>
-            <Slider name="progress" value={item.progress} onChange={editEventHandler} valueLabelDisplay="auto" />
-          </Grid>
-          <Grid item sm={2} md={4}>
-            <Typography>
-              {"priority: " + item.priority}
-            </Typography>
-            <Rating name="priority" value={item.priority} onChange={editEventHandler} />
-          </Grid>
-          <Grid item sm={2} md={4}>
-            <Typography>
-              {"stress: " + item.stress}
-            </Typography>
-            <StyledRating
-              name="stress"
-              value={item.stress}
-              onChange={editEventHandler}
-              IconContainerComponent={IconContainer}
-              getLabelText={(value) => customIcons[value].label}
-              highlightSelectedOnly
-            />
-          </Grid>
-        </Grid>
-        <Grid container spacing={{ sm: 2, md: 4 }} columns={{ sm: 6, md: 12 }}>
-          <Grid item sm={2} md={4}>
-              <Button
-                label="Created Date"
-                name="createdDate"
-                readOnly
-              >
-                {item.createdDate}
-                </Button>
-          </Grid>
-          <Grid item sm={2} md={4}>
-            <Button
-                label="Updated Date"
-                name="updatedDate"
-                readOnly
-              >
-              {item.updatedDate}
-            </Button>
-          </Grid>
-          <Grid item sm={2} md={4}>
-              <Button
-                label="Deadline Date"
-                name="deadline"
-              >
-                {item.deadline}
-                </Button>
-          </Grid>
-        </Grid>
-      </AccordionDetails>
-    </Accordion>
+          </TableCell>
+        </TableRow>
+        <TableRow>
+          <TableCell sx={{ paddingBottom: 0, paddingTop: 0 }} colSpan={6}>
+            <Collapse in={open} timeout="auto" unmountOnExit>
+              <Box sx={{ my: 2 }}>
+                <Typography variant="h6" gutterBottom component="div">
+                  {"상세 내용"}
+                </Typography>
+                <Table>
+                  <TableHead>
+                    <TableRow>
+                      <TableCell align="center">{"제목"}</TableCell>
+                      <TableCell align="center">{"완료"}</TableCell>
+                      <TableCell align="center">{"진행도"}</TableCell>
+                      <TableCell align="center">{"우선순위"}</TableCell>
+                      <TableCell align="center">{"스트레스"}</TableCell>
+                      <TableCell align="center">{"마감 날짜"}</TableCell>
+                      <TableCell align="center">{"수정 날짜"}</TableCell>
+                      <TableCell align="center">{"생성 날짜"}</TableCell>
+                      <TableCell></TableCell>
+                    </TableRow>
+                  </TableHead>
+                  <TableBody>
+                    <TableRow>
+                      <TableCell>
+                        <TextField
+                          variant="outlined"
+                          type="text"
+                          name="title"
+                          label="제목"
+                          value={item.title}
+                          onChange={editEventHandler}
+                        />
+                      </TableCell>
+                      <TableCell align="center">
+                        <Switch
+                          checked={item.done}
+                          onChange={checkboxEventHandler}
+                        />
+                      </TableCell>
+                      <TableCell align="center">
+                        <Slider name="progress" value={item.progress} onChange={editEventHandler} valueLabelDisplay="auto" />
+                      </TableCell>
+                      <TableCell align="center">
+                        <Rating name="priority" value={item.priority} onChange={editEventHandler} />
+                      </TableCell>
+                      <TableCell align="center">
+                        <StyledRating
+                          name="stress"
+                          value={item.stress}
+                          onChange={editEventHandler}
+                          IconContainerComponent={IconContainer}
+                          getLabelText={(value) => customIcons[value].label}
+                          highlightSelectedOnly
+                        />
+                      </TableCell>
+                      <TableCell align="center">
+                        {new Date(item.deadline).toLocaleString()}
+                      </TableCell>
+                      <TableCell align="center">
+                        {new Date(item.updatedDate).toLocaleDateString()}
+                      </TableCell>
+                      <TableCell align="center">
+                        {new Date(item.createdDate).toLocaleDateString()}
+                      </TableCell>
+                      <TableCell align="center">
+                        <Tooltip title="삭제" placement="bottom">
+                          <IconButton
+                            color="error"
+                            aria-label="Delete Todo"
+                            onClick={deleteEventHandler}
+                          >
+                            <Delete />
+                          </IconButton>
+                        </Tooltip>
+                      </TableCell>
+                    </TableRow>
+                  </TableBody>
+                </Table>
+              </Box>
+            </Collapse>
+          </TableCell>
+        </TableRow>
+    </Fragment>
   );
 };
 

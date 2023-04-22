@@ -7,7 +7,7 @@ const Add = (props) => {
     title: "",
     done: false,
     progress: 0,
-    priority: 1,
+    priority: 5,
     stress: 3,
     deadline: null,
     createdDate: null,
@@ -21,7 +21,7 @@ const Add = (props) => {
       title: "",
       done: false,
       progress: 0,
-      priority: 1,
+      priority: 5,
       stress: 3,
       deadline: null,
       createdDate: null,
@@ -29,8 +29,8 @@ const Add = (props) => {
     });
   };
 
-  const onInputChange = (e) => {
-    setItem({...item, title: e.target.value, deadline: new Date() });
+  const changeTitleHandler = (e) => {
+    setItem({...item, title: e.target.value});
   };
 
   const enterKeyEventHandler = (e) => {
@@ -44,20 +44,21 @@ const Add = (props) => {
       }}
     >
       <TextField
-        label="Add Todo"
+        label="할 일의 제목을 입력해 주세요."
         fullWidth
         variant="outlined"
-        onChange={onInputChange}
+        onChange={changeTitleHandler}
         onKeyPress={enterKeyEventHandler}
         value={item.title}
         InputProps={{
           endAdornment:
             <InputAdornment position="end">
               <Button
-                fullWidth
                 variant="contained"
+                color="inherit"
                 onClick={onButtonClick}
                 startIcon={<PlaylistAdd />}
+                fullWidth
               >
                 ADD
               </Button>

@@ -1,4 +1,4 @@
-import { Box, CircularProgress, Paper } from "@mui/material";
+import { Box, CircularProgress, Paper, Table, TableBody, TableCell, TableContainer, TableHead, TableRow } from "@mui/material";
 import { useEffect, useState } from "react";
 import { call } from "../../service/ApiService";
 import TodoAdd from "./Add";
@@ -9,7 +9,7 @@ function Frame() {
   const [loading, setLoading] = useState(true);
 
   const accessToken = localStorage.getItem("ACCESS_TOKEN");
-  if(!accessToken || accessToken === null) window.location.href = "/signin";
+  if (!accessToken || accessToken === null) window.location.href = "/signin";
 
   useEffect(() => {
     call("/todo", "GET", null).then((response) => {
@@ -42,25 +42,41 @@ function Frame() {
       }}
     >
       <TodoAdd addItem={addItem} />
-      {items.length > 0 &&
-        (items.map((item) => (
-          <TodoList
-          item={item}
-          key={item.uuid}
-          editItem={editItem}
-          deleteItem={deleteItem}
-          />
-          )))
-        }
+      <TableContainer component={Paper}>
+        <Table aria-label="todo list table">
+          <TableHead>
+            <TableRow>
+              <TableCell align="center">{"제목"}</TableCell>
+              <TableCell align="center">{"완료"}</TableCell>
+              <TableCell align="center">{"진행도"}</TableCell>
+              <TableCell align="center">{"우선순위"}</TableCell>
+              <TableCell align="center">{"마감 날짜"}</TableCell>
+              <TableCell />
+            </TableRow>
+          </TableHead>
+          <TableBody>
+            {items.length > 0 &&
+              (items.map((item) => (
+                <TodoList
+                  item={item}
+                  key={item.uuid}
+                  editItem={editItem}
+                  deleteItem={deleteItem}
+                />
+              )))
+            }
+          </TableBody>
+        </Table>
+      </TableContainer>
     </Paper>
   );
-  
+
   let loadingAnimation = (
     <Box margin={6} textAlign={"center"}>
       <CircularProgress size={100} />
     </Box>
   );
-  
+
   return (
     <Box textAlign={"center"}>
       {!loading ? todoPage : loadingAnimation}
