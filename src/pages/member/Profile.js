@@ -1,57 +1,24 @@
 import { ManageAccounts, Publish, Visibility, VisibilityOff } from "@mui/icons-material";
 import { Alert, Avatar, Box, Button, Container, IconButton, InputAdornment, Snackbar, TextField, Typography } from "@mui/material";
-import { useState } from "react";
-import { call } from "../../service/ApiService";
+import { useEffect, useState } from "react";
 import { strengthColor, strengthIndicator } from "../../utils/password-strength";
 
 export default function Profile() {
-    const [showPassword, setShowPassword] = useState(false);
-  const [checkIdMsg, setCheckIdMsg] = useState();
+  const [showPassword, setShowPassword] = useState(false);
   const [strength, setStrength] = useState();
   const [open, setOpen] = useState(false);
-  const [validationId, setValidationId] = useState(false);
   const [validationPw, setValidationPw] = useState(false);
-  
+
   const changePassword = (value) => {
     const level = strengthIndicator(value);
-    if(level < 2) setValidationPw(false);
+    if (level < 2) setValidationPw(false);
     else setValidationPw(true);
     setStrength(strengthColor(level));
-  };
-  
-  const checkIdentifier = (identifier) => {
-    call("/member/id-check", "POST", { identifier: identifier })
-    .then((response) => {
-      if(response) {
-        setValidationId(false);
-        setCheckIdMsg({ label: "Not available", color: "#f44336" });
-      } else {
-        setValidationId(true);
-        setCheckIdMsg({ label: "It's possible to use", color: "#00c853" });
-      }
-    });
   };
 
   const handleSubmit = (event) => {
     event.preventDefault();
     const data = new FormData(event.target);
-    if(data.get("identifier").length < 1 || data.get("password").length < 1) {
-      setOpen(true);
-      return;
-    }
-    if(!validationId || !validationPw) {
-      setOpen(true);
-      return;
-    }
-    // const dto = {
-    //   identifier: data.get("identifier"),
-    //   password: data.get("password"),
-    //   name: data.get("name"),
-    //   email: data.get("email")
-    // };
-    // signUp(dto).then((response) => {
-    //   window.location.href = "/signin";
-    // });
   };
 
   const handleClose = (event, reason) => {
@@ -100,12 +67,8 @@ export default function Profile() {
             variant="outlined"
             margin="normal"
             label="ID"
-            required
+            disabled
             fullWidth
-            onBlur={(e) => {
-              checkIdentifier(e.target.value);
-            }}
-            helperText={checkIdMsg?.label}
           />
           <TextField
             id="password"
@@ -120,7 +83,7 @@ export default function Profile() {
               endAdornment: (
                 <InputAdornment position="end">
                   <IconButton onClick={() => setShowPassword(!showPassword)} edge="end">
-                  {showPassword ? <Visibility /> : <VisibilityOff />}
+                    {showPassword ? <Visibility /> : <VisibilityOff />}
                   </IconButton>
                 </InputAdornment>
               ),

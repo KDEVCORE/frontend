@@ -2,57 +2,48 @@ import { PersonAdd, Publish, Visibility, VisibilityOff } from "@mui/icons-materi
 import { Alert, Avatar, Box, Button, Container, IconButton, InputAdornment, Paper, Snackbar, TextField, Typography } from "@mui/material";
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
-import { call, signUp } from "../../service/ApiService";
+import { getAuthStatus, signUp } from "../../service/ApiService";
 import { strengthColor, strengthIndicator } from "../../utils/password-strength";
 
 export default function SignUp() {
   const [showPassword, setShowPassword] = useState(false);
-  const [checkIdMsg, setCheckIdMsg] = useState();
   const [strength, setStrength] = useState();
-  const [open, setOpen] = useState(false);
-  const [validationId, setValidationId] = useState(false);
   const [validationPw, setValidationPw] = useState(false);
+  const [open, setOpen] = useState(false);
+  const [alertMsg, setAlertMsg] = useState("");
+  
+  if(getAuthStatus()) window.location.href = "/";
   
   const changePassword = (value) => {
     const level = strengthIndicator(value);
-    if(level < 2) setValidationPw(false);
+    if(level < 1) setValidationPw(false);
     else setValidationPw(true);
     setStrength(strengthColor(level));
   };
   
-  const checkIdentifier = (identifier) => {
-    call("/member/id-check", "POST", { identifier: identifier })
-    .then((response) => {
-      if(response) {
-        setValidationId(false);
-        setCheckIdMsg({ label: "Not available", color: "#f44336" });
-      } else {
-        setValidationId(true);
-        setCheckIdMsg({ label: "It's possible to use", color: "#00c853" });
-      }
-    });
-  };
-
   const handleSubmit = (event) => {
     event.preventDefault();
     const data = new FormData(event.target);
-    if(data.get("identifier").length < 1 || data.get("password").length < 1) {
+    
+    if(!validationPw) {
+      setAlertMsg("비밀번호를 확인해 주십시오.")
       setOpen(true);
       return;
     }
-    console.log(validationId, validationPw);
-    if(!validationId || !validationPw) {
-      setOpen(true);
-      return;
-    }
+
     const dto = {
       identifier: data.get("identifier"),
       password: data.get("password"),
       name: data.get("name"),
       email: data.get("email")
     };
-    signUp(dto).then((response) => {
-      window.location.href = "/signin";
+
+    signUp(dto)
+    .then((response) => {
+      if(!response.ok) {
+        setAlertMsg("입력 정보를 확인해 주십시오.");
+        setOpen(true);
+      } else window.location.href = "/signin";
     });
   };
 
@@ -92,7 +83,7 @@ export default function SignUp() {
               sx={{ width: '100%' }}
               onClose={handleClose}
             >
-              {"입력 정보를 확인해 주십시오"}
+              {alertMsg}
             </Alert>
           </Snackbar>
           <TextField
@@ -104,10 +95,6 @@ export default function SignUp() {
             label="ID"
             required
             fullWidth
-            onBlur={(e) => {
-              checkIdentifier(e.target.value);
-            }}
-            helperText={checkIdMsg?.label}
           />
           <TextField
             id="password"

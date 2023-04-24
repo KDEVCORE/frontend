@@ -41,10 +41,8 @@ export function signIn(userDTO) {
     .then((response) => {
       if (response.token) {
         localStorage.setItem("ACCESS_TOKEN", response.token);
-        window.location.href = "/todo";
-      } else {
-        return response;
       }
+      return response;
     })
   );
 }

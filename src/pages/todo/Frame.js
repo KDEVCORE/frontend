@@ -1,15 +1,14 @@
 import { Box, CircularProgress, Paper, Table, TableBody, TableCell, TableContainer, TableHead, TableRow } from "@mui/material";
 import { useEffect, useState } from "react";
-import { call } from "../../service/ApiService";
+import { call, getAuthStatus } from "../../service/ApiService";
 import TodoAdd from "./Add";
 import TodoList from "./List";
 
-function Frame() {
+export default function Frame() {
   const [items, setItems] = useState([]);
   const [loading, setLoading] = useState(true);
 
-  const accessToken = localStorage.getItem("ACCESS_TOKEN");
-  if (!accessToken || accessToken === null) window.location.href = "/signin";
+  if(!getAuthStatus()) window.location.href = "/signin";
 
   useEffect(() => {
     call("/todo", "GET", null).then((response) => {
@@ -83,5 +82,3 @@ function Frame() {
     </Box>
   );
 }
-
-export default Frame;

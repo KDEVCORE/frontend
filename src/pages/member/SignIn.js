@@ -2,17 +2,28 @@ import { ExitToApp, Security, Visibility, VisibilityOff } from "@mui/icons-mater
 import { Alert, Avatar, Box, Button, ButtonGroup, Container, Divider, IconButton, InputAdornment, Paper, Snackbar, TextField, Tooltip, Typography, Zoom } from "@mui/material";
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
-import { signIn, signInOAuth2 } from "../../service/ApiService";
+import { getAuthStatus, signIn, signInOAuth2 } from "../../service/ApiService";
 
 export default function SignIn() {
   const [showPassword, setShowPassword] = useState(false);
   const [open, setOpen] = useState(false);
+  const [alertMsg, setAlertMsg] = useState("");
+
+  if(getAuthStatus()) window.location.href = "/";
 
   const handleSignIn = (event) => {
     event.preventDefault();
     const data = new FormData(event.target);
-    signIn({ identifier: data.get("identifier"), password: data.get("password") }).then((response) => {
-      if(response !== 200) setOpen(true);
+    const dto = {
+      identifier: data.get("identifier"),
+      password: data.get("password"),
+    }
+    signIn(dto)
+    .then((response) => {
+      if(!response.ok) {
+        setAlertMsg("입력 정보를 확인해 주십시오.");
+        setOpen(true);
+      } else window.location.href = "/todo";
     });
   };
 
@@ -56,7 +67,7 @@ export default function SignIn() {
               sx={{ width: '100%' }}
               onClose={handleClose}
             >
-              {"입력 정보를 확인해 주십시오"}
+              {alertMsg}
             </Alert>
           </Snackbar>
           <TextField
