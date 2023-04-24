@@ -5,11 +5,7 @@ export function call(api, method, request) {
     "Content-Type": "application/json",
   });
 
-  const accessToken = localStorage.getItem("ACCESS_TOKEN");
-  if (accessToken && accessToken !== null) {
-    headers.append("Authorization", "Bearer " + accessToken);
-
-  }
+  if (getAuthStatus()) headers.append("Authorization", "Bearer " + localStorage.getItem("ACCESS_TOKEN"));
 
   let options = {
     headers: headers,
@@ -20,6 +16,7 @@ export function call(api, method, request) {
 
   return fetch(options.url, options)
     .then((response) => {
+      // console.log(response);
       switch (response.status) {
         case 200:
           return response.json();
@@ -27,26 +24,29 @@ export function call(api, method, request) {
         case 403:
         case 500:
         case 502:
-          return response.status;
+          return response;
         default:
           new Error(response);
       }
     })
     .catch((error) => {
       console.log("http error");
-      console.log(error);
+      return error;
     });
 }
 
 export function signIn(userDTO) {
-  return call("/member/signin", "POST", userDTO).then((response) => {
-    if (response.token) {
-      localStorage.setItem("ACCESS_TOKEN", response.token);
-      window.location.href = "/todo";
-    } else {
-      return response.status;
-    }
-  });
+  return (
+    call("/auth/signin", "POST", userDTO)
+    .then((response) => {
+      if (response.token) {
+        localStorage.setItem("ACCESS_TOKEN", response.token);
+        window.location.href = "/todo";
+      } else {
+        return response;
+      }
+    })
+  );
 }
 
 export function signOut() {
@@ -55,7 +55,10 @@ export function signOut() {
 }
 
 export function signUp(userDTO) {
-  return call("/member/signup", "POST", userDTO);
+  return (
+    call("/auth/signup", "POST", userDTO)
+    .then((response) => { return response; })
+  );
 }
 
 export function signInOAuth2(provider) {

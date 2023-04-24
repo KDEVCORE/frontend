@@ -9,6 +9,7 @@ import SignIn from "./pages/member/SignIn";
 import SignInOAuth2 from "./pages/member/SignInOAuth2";
 import SignUp from "./pages/member/SignUp";
 import Todo from "./pages/todo/Frame";
+import Profile from "./pages/member/Profile";
 
 function ScrollTop(props) {
   const { children, window } = props;
@@ -67,6 +68,7 @@ export default function AppRouter(props) {
             <Route path="/signin-oauth" element={<SignInOAuth2 />} />
             <Route path="/signup" element={<SignUp />} />
             <Route path="/todo" element={<Todo />} />
+            <Route Path="/profile" element={<Profile />} />
           </Routes>
         </BrowserRouter>
       </Box>

@@ -39,7 +39,6 @@ export default function Profile() {
       setOpen(true);
       return;
     }
-    console.log(validationId, validationPw);
     if(!validationId || !validationPw) {
       setOpen(true);
       return;
