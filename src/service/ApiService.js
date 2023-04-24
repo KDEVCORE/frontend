@@ -16,7 +16,6 @@ export function call(api, method, request) {
 
   return fetch(options.url, options)
     .then((response) => {
-      // console.log(response);
       switch (response.status) {
         case 200:
           return response.json();
@@ -35,28 +34,17 @@ export function call(api, method, request) {
     });
 }
 
+export function signUp(userDTO) {
+  return call("/auth/signup", "POST", userDTO);
+}
+
 export function signIn(userDTO) {
-  return (
-    call("/auth/signin", "POST", userDTO)
-    .then((response) => {
-      if (response.token) {
-        localStorage.setItem("ACCESS_TOKEN", response.token);
-      }
-      return response;
-    })
-  );
+  return call("/auth/signin", "POST", userDTO);
 }
 
 export function signOut() {
   localStorage.removeItem("ACCESS_TOKEN");
   window.location.href = "/";
-}
-
-export function signUp(userDTO) {
-  return (
-    call("/auth/signup", "POST", userDTO)
-    .then((response) => { return response; })
-  );
 }
 
 export function signInOAuth2(provider) {

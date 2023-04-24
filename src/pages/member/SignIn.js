@@ -17,13 +17,17 @@ export default function SignIn() {
     const dto = {
       identifier: data.get("identifier"),
       password: data.get("password"),
-    }
+    };
+
     signIn(dto)
     .then((response) => {
-      if(!response.ok) {
+      if (response.token) {
+        localStorage.setItem("ACCESS_TOKEN", response.token);
+        window.location.href = "/";
+      } else {
         setAlertMsg("입력 정보를 확인해 주십시오.");
         setOpen(true);
-      } else window.location.href = "/todo";
+      }
     });
   };
 

@@ -40,10 +40,7 @@ export default function SignUp() {
 
     signUp(dto)
     .then((response) => {
-      if(!response.ok) {
-        setAlertMsg("입력 정보를 확인해 주십시오.");
-        setOpen(true);
-      } else window.location.href = "/signin";
+      window.location.href = "/signin";
     });
   };
 
