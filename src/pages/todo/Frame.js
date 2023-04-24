@@ -18,7 +18,6 @@ export default function Frame() {
   }, []);
 
   const addItem = (item) => {
-    console.log(item);
     call("/todo", "POST", item)
       .then((response) => setItems(response.data));
   };

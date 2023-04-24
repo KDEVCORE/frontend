@@ -1,6 +1,8 @@
 import { Delete, KeyboardArrowDown, KeyboardArrowUp, SentimentDissatisfied, SentimentSatisfied, SentimentSatisfiedAlt, SentimentVeryDissatisfied, SentimentVerySatisfied } from "@mui/icons-material";
 import { Box, Collapse, IconButton, Rating, Slider, Switch, Table, TableBody, TableCell, TableHead, TableRow, TextField, Tooltip, Typography } from "@mui/material";
 import { styled } from '@mui/material/styles';
+import { DatePicker, DateTimeField } from "@mui/x-date-pickers";
+import dayjs from "dayjs";
 import PropTypes from 'prop-types';
 import React, { Fragment, useState } from "react";
 
@@ -45,25 +47,26 @@ const customIcons = {
 const List = (props) => {
   const [item, setItem] = useState(props.item);
   const [open, setOpen] = useState(false);
-  const deleteItem = props.deleteItem;
+  
   const editItem = props.editItem;
+  const deleteItem = props.deleteItem;
 
   const editEventHandler = (e) => {
     switch (e.target.name) {
       case "title":
-        setItem({ ...item, title: e.target.value });
+        item.title = e.target.value;
+        break;
+      case "done":
+        item.done = e.target.checked;
         break;
       case "progress":
-        setItem({ ...item, progress: Number(e.target.value) });
+        item.progress = Number(e.target.value);
         break;
       case "priority":
-        setItem({ ...item, priority: Number(e.target.value) });
+        item.priority = Number(e.target.value);
         break;
       case "stress":
-        setItem({ ...item, stress: Number(e.target.value) });
-        break;
-      case "deadline":
-        setItem({ ...item, deadline: Date(e.target.value) });
+        item.stress = Number(e.target.value);
         break;
       default:
         setItem({ ...item });
@@ -71,8 +74,8 @@ const List = (props) => {
     editItem(item);
   };
 
-  const checkboxEventHandler = (e) => {
-    item.done = e.target.checked;
+  const editDateHandler = (deadline) => {
+    item.deadline = deadline;
     editItem(item);
   };
 
@@ -142,8 +145,9 @@ const List = (props) => {
                       </TableCell>
                       <TableCell align="center">
                         <Switch
+                          name="done"
                           checked={item.done}
-                          onChange={checkboxEventHandler}
+                          onChange={editEventHandler}
                         />
                       </TableCell>
                       <TableCell align="center">
@@ -163,13 +167,25 @@ const List = (props) => {
                         />
                       </TableCell>
                       <TableCell align="center">
-                        {new Date(item.deadline).toLocaleString()}
+                        <DatePicker
+                          label="마감 날짜"
+                          value={dayjs(item.deadline)}
+                          onChange={(value) => editDateHandler(value)}
+                        />
                       </TableCell>
                       <TableCell align="center">
-                        {new Date(item.updatedDate).toLocaleDateString()}
+                        <DateTimeField
+                          label="변경 날짜"
+                          defaultValue={dayjs(item.updatedDate)}
+                          disabled
+                        />
                       </TableCell>
                       <TableCell align="center">
-                        {new Date(item.createdDate).toLocaleDateString()}
+                        <DateTimeField
+                          label="생성 날짜"
+                          defaultValue={dayjs(item.createdDate)}
+                          disabled
+                        />
                       </TableCell>
                       <TableCell align="center">
                         <Tooltip title="삭제" placement="bottom">
