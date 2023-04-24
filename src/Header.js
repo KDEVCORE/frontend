@@ -94,11 +94,11 @@ const Header = (props) => {
                                     open={Boolean(menuItem)}
                                     onClose={handleClose}
                                 >
-                                    <MenuItem>
+                                    {/* <MenuItem>
                                         <Link href="/profile" underline="none" variant="button">
                                             {"profile"}
                                         </Link>
-                                    </MenuItem>
+                                    </MenuItem> */}
                                     <Divider />
                                     <MenuItem onClick={signOut}>
                                         <Link href="#" underline="none" variant="button">
