@@ -2,7 +2,7 @@ import { AccountCircle, Block, ExitToApp, Home, Verified } from "@mui/icons-mate
 import { AppBar, Box, Chip, Divider, IconButton, Link, Menu, MenuItem, Toolbar, Tooltip, Typography, useScrollTrigger } from "@mui/material";
 import PropTypes from 'prop-types';
 import { cloneElement, Fragment, useState } from "react";
-import { getAuthStatus, signOut } from "./service/ApiService";
+import { signOut } from "./service/ApiService";
 
 function ElevationScroll(props) {
     const { children, window } = props;
@@ -58,12 +58,12 @@ const Header = (props) => {
                     />
                     <Chip
                         label="Authentication"
-                        color={getAuthStatus() ? "success" : "default"}
-                        icon={getAuthStatus() ? <Verified /> : <Block />}
+                        color={props.auth ? "success" : "default"}
+                        icon={props.auth ? <Verified /> : <Block />}
                         
                     />
                     <Box>
-                        {getAuthStatus() && (
+                        {props.auth && (
                             <Fragment>
                                 <IconButton
                                     aria-label="account of current user"
@@ -108,7 +108,7 @@ const Header = (props) => {
                                 </Menu>
                             </Fragment>
                         )}
-                        {!getAuthStatus() && (
+                        {!props.auth && (
                             <Fragment>
                                 <IconButton
                                     aria-label="member process choice"

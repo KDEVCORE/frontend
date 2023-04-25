@@ -4,6 +4,7 @@ import { koKR, LocalizationProvider } from "@mui/x-date-pickers";
 import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
 import 'dayjs/locale/ko';
 import PropTypes from 'prop-types';
+import { useEffect, useState } from "react";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import Footer from "./Footer";
 import Header from "./Header";
@@ -12,6 +13,7 @@ import SignIn from "./pages/member/SignIn";
 import SignInOAuth2 from "./pages/member/SignInOAuth2";
 import SignUp from "./pages/member/SignUp";
 import Todo from "./pages/todo/Frame";
+import { getAuthStatus } from "./service/ApiService";
 
 function ScrollTop(props) {
   const { children, window } = props;
@@ -52,6 +54,11 @@ ScrollTop.propTypes = {
 };
 
 export default function AppRouter(props) {
+  const [authStatus, setAuthStatus] = useState(false);
+  useEffect(() => {
+    setAuthStatus(getAuthStatus());
+  }, []);
+
   return (
     <LocalizationProvider
       dateAdapter={AdapterDayjs}
@@ -65,19 +72,17 @@ export default function AppRouter(props) {
           minHeight: '100vh',
         }}
       >
-        <Header />
+        <Header auth={authStatus} />
         <Toolbar id="back-to-top-anchor" />
-        <Box>
-          <BrowserRouter>
-            <Routes>
-              <Route path="/" element={<Home />} />
-              <Route path="/signin" element={<SignIn />} />
-              <Route path="/signin-oauth" element={<SignInOAuth2 />} />
-              <Route path="/signup" element={<SignUp />} />
-              <Route path="/todo" element={<Todo />} />
-            </Routes>
-          </BrowserRouter>
-        </Box>
+        <BrowserRouter>
+          <Routes>
+            <Route path="/" element={<Home />} />
+            <Route path="/signin" element={<SignIn />} />
+            <Route path="/signin-oauth" element={<SignInOAuth2 />} />
+            <Route path="/signup" element={<SignUp />} />
+            <Route path="/todo" element={<Todo />} />
+          </Routes>
+        </BrowserRouter>
         <Footer />
         <ScrollTop {...props}>
           <Fab size="medium" aria-label="scroll back to top">
