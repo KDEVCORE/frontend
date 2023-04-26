@@ -1,5 +1,5 @@
-import { Delete, KeyboardArrowDown, KeyboardArrowUp, SentimentDissatisfied, SentimentSatisfied, SentimentSatisfiedAlt, SentimentVeryDissatisfied, SentimentVerySatisfied } from "@mui/icons-material";
-import { Box, Collapse, IconButton, Rating, Slider, Switch, Table, TableBody, TableCell, TableHead, TableRow, TextField, Tooltip, Typography } from "@mui/material";
+import { Delete, KeyboardArrowDown, KeyboardArrowUp, Send, SentimentDissatisfied, SentimentSatisfied, SentimentSatisfiedAlt, SentimentVeryDissatisfied, SentimentVerySatisfied } from "@mui/icons-material";
+import { Box, Collapse, IconButton, InputAdornment, Rating, Slider, Switch, Table, TableBody, TableCell, TableHead, TableRow, TextField, Tooltip, Typography } from "@mui/material";
 import { styled } from '@mui/material/styles';
 import { DatePicker, DateTimeField } from "@mui/x-date-pickers";
 import dayjs from "dayjs";
@@ -51,32 +51,35 @@ const List = (props) => {
   const editItem = props.editItem;
   const deleteItem = props.deleteItem;
 
-  const editEventHandler = (e) => {
-    switch (e.target.name) {
-      case "title":
-        item.title = e.target.value;
-        break;
-      case "done":
-        item.done = e.target.checked;
-        break;
-      case "progress":
-        item.progress = Number(e.target.value);
-        break;
-      case "priority":
-        item.priority = Number(e.target.value);
-        break;
-      case "stress":
-        item.stress = Number(e.target.value);
-        break;
-      default:
-        setItem({ ...item });
-    }
+  const editSaveHandler = (e) => {
     editItem(item);
   };
-
-  const editDateHandler = (deadline) => {
-    item.deadline = deadline;
-    editItem(item);
+  const editTitleHandler = (event) => {
+    item.title = event.target.value;
+    setItem({...item});
+  };
+  const editDoneHandler = (event) => {
+    item.done = event.target.checked;
+    setItem({...item});
+  };
+  const editProgressHandler = (event) => {
+    const value = Number(event.target.value);
+    item.progress = value < 0 ? 0 : value > 100 ? 100 : value;
+    setItem({...item});
+  };
+  const editPriorityHandler = (event) => {
+    const value = Number(event.target.value);
+    item.priority = value < 1 ? 1 : value > 5 ? 5 : value;
+    setItem({...item});
+  };
+  const editStressHandler = (event) => {
+    const value = Number(event.target.value);
+    item.stress = value < 1 ? 1 : value > 5 ? 5 : value;;
+    setItem({...item});
+  };
+  const editDateHandler = (value) => {
+    item.deadline = new Date(dayjs(value));
+    setItem({...item});
   };
 
   const deleteEventHandler = () => {
@@ -93,10 +96,10 @@ const List = (props) => {
             <Switch checked={item.done} readOnly />
           </TableCell>
           <TableCell align="center">
-            {item.progress}
+            <Slider value={item.progress} readOnly />
           </TableCell>
           <TableCell align="center">
-            {item.priority}
+            <Rating value={item.priority} readOnly />
           </TableCell>
           <TableCell align="center">
             {new Date(item.deadline).toLocaleDateString()}
@@ -128,39 +131,53 @@ const List = (props) => {
                       <TableCell align="center">{"마감 날짜"}</TableCell>
                       <TableCell align="center">{"수정 날짜"}</TableCell>
                       <TableCell align="center">{"생성 날짜"}</TableCell>
-                      <TableCell></TableCell>
+                      <TableCell align="center">{"저장"}</TableCell>
+                      <TableCell align="center">{"삭제"}</TableCell>
                     </TableRow>
                   </TableHead>
                   <TableBody>
                     <TableRow>
-                      <TableCell>
+                      <TableCell component="th" scope="row">
                         <TextField
                           variant="outlined"
                           type="text"
-                          name="title"
                           label="제목"
                           value={item.title}
-                          onChange={editEventHandler}
+                          onChange={editTitleHandler}
+                          fullWidth 
                         />
                       </TableCell>
                       <TableCell align="center">
                         <Switch
-                          name="done"
                           checked={item.done}
-                          onChange={editEventHandler}
+                          onChange={editDoneHandler}
                         />
                       </TableCell>
                       <TableCell align="center">
-                        <Slider name="progress" value={item.progress} onChange={editEventHandler} valueLabelDisplay="auto" />
+                        <TextField
+                          label="진행률"
+                          variant="outlined"
+                          type="number"
+                          value={item.progress}
+                          helperText="0~100"
+                          sx={{ m: 1, width: '25ch' }}
+                          InputProps={{
+                            endAdornment: <InputAdornment position="end">{"%"}</InputAdornment>,
+                          }}
+                          onChange={editProgressHandler}
+                        />
                       </TableCell>
                       <TableCell align="center">
-                        <Rating name="priority" value={item.priority} onChange={editEventHandler} />
+                        <Rating
+                          value={item.priority}
+                          onChange={editPriorityHandler}
+                        />
                       </TableCell>
                       <TableCell align="center">
                         <StyledRating
                           name="stress"
                           value={item.stress}
-                          onChange={editEventHandler}
+                          onChange={editStressHandler}
                           IconContainerComponent={IconContainer}
                           getLabelText={(value) => customIcons[value].label}
                           highlightSelectedOnly
@@ -177,15 +194,26 @@ const List = (props) => {
                         <DateTimeField
                           label="변경 날짜"
                           defaultValue={dayjs(item.updatedDate)}
-                          disabled
+                          readOnly
                         />
                       </TableCell>
                       <TableCell align="center">
                         <DateTimeField
                           label="생성 날짜"
                           defaultValue={dayjs(item.createdDate)}
-                          disabled
+                          readOnly
                         />
+                      </TableCell>
+                      <TableCell align="center">
+                        <Tooltip title="저장" placement="bottom">
+                          <IconButton
+                            color="info"
+                            aria-label="Edit Todo"
+                            onClick={editSaveHandler}
+                          >
+                            <Send />
+                          </IconButton>
+                        </Tooltip>
                       </TableCell>
                       <TableCell align="center">
                         <Tooltip title="삭제" placement="bottom">
