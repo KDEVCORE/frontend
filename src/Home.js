@@ -3,7 +3,8 @@ import { Fragment } from "react";
 import IntroHero from "./pages/intro/Hero";
 import IntroTechBack from "./pages/intro/TechBack";
 import IntroTechFront from "./pages/intro/TechFront";
-import IntroTechServer from "./pages/intro/TechServer";
+import IntroTechPlatform from "./pages/intro/TechPlatform";
+import IntroDesign from "./pages/intro/Design";
 
 function Home() {
   return (
@@ -14,7 +15,9 @@ function Home() {
       <Divider />
       <IntroTechFront />
       <Divider />
-      <IntroTechServer />
+      <IntroTechPlatform />
+      <Divider />
+      <IntroDesign />
       <Divider />
     </Fragment>
   );

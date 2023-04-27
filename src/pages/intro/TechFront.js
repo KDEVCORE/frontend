@@ -80,10 +80,10 @@ export default function IntroTechFront() {
                             aria-labelledby="alert-dialog-title"
                             aria-describedby="alert-dialog-description"
                         >
-                            <DialogTitle id="alert-dialog-title">
-                                {"FRONT-END"}
+                            <DialogTitle id="alert-dialog-title" variant="button">
+                                {"front-end"}
                             </DialogTitle>
-                            <DialogContent>
+                            <DialogContent dividers>
                                 <DialogContentText id="alert-dialog-description">
                                     <List>
                                         <ListItem>
@@ -157,10 +157,10 @@ export default function IntroTechFront() {
                             aria-labelledby="alert-dialog-title"
                             aria-describedby="alert-dialog-description"
                         >
-                            <DialogTitle id="alert-dialog-title">
+                            <DialogTitle id="alert-dialog-title" variant="button">
                                 {"FRONT-END"}
                             </DialogTitle>
-                            <DialogContent>
+                            <DialogContent dividers>
                                 <DialogContentText id="alert-dialog-description">
                                     <List>
                                         <ListItem>
@@ -218,10 +218,10 @@ export default function IntroTechFront() {
                             aria-labelledby="alert-dialog-title"
                             aria-describedby="alert-dialog-description"
                         >
-                            <DialogTitle id="alert-dialog-title">
+                            <DialogTitle id="alert-dialog-title" variant="button">
                                 {"FRONT-END"}
                             </DialogTitle>
-                            <DialogContent>
+                            <DialogContent dividers>
                                 <DialogContentText id="alert-dialog-description">
                                     <List>
                                         <ListItem>

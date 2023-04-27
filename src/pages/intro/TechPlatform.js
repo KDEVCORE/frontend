@@ -15,7 +15,7 @@ const number = {
     textAlign: "center",
 };
 
-export default function IntroTechServer () {
+export default function IntroTechPlatform () {
     const [open1, setOpen1] = useState(false);
 
     const handleClickOpen1 = () => {
@@ -71,10 +71,10 @@ export default function IntroTechServer () {
                             aria-labelledby="alert-dialog-title"
                             aria-describedby="alert-dialog-description"
                         >
-                            <DialogTitle id="alert-dialog-title">
+                            <DialogTitle id="alert-dialog-title" variant="button">
                                 {"PLATFORM"}
                             </DialogTitle>
-                            <DialogContent>
+                            <DialogContent dividers>
                                 <DialogContentText id="alert-dialog-description">
                                     <List>
                                         <ListItem>

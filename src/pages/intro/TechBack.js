@@ -1,6 +1,7 @@
 import { Check, DeveloperBoard, PowerSettingsNew, VerifiedUserOutlined } from "@mui/icons-material";
-import { Button, Card, CardActionArea, CardContent, Container, Dialog, DialogActions, DialogContent, DialogContentText, DialogTitle, Grid, List, ListItem, ListItemIcon, ListItemText, Typography } from "@mui/material";
+import { Button, Card, CardActionArea, CardContent, Container, Dialog, DialogActions, DialogContent, DialogContentText, DialogTitle, Grid, Link, List, ListItem, ListItemIcon, ListItemText, Typography } from "@mui/material";
 import { useState } from "react";
+import { API_BASE_URL } from "../../appConfig";
 
 const item = {
     display: 'flex',
@@ -80,10 +81,10 @@ export default function IntroTechBack() {
                             aria-labelledby="alert-dialog-title"
                             aria-describedby="alert-dialog-description"
                         >
-                            <DialogTitle id="alert-dialog-title">
+                            <DialogTitle id="alert-dialog-title" variant="button">
                                 {"BACK-END"}
                             </DialogTitle>
-                            <DialogContent>
+                            <DialogContent dividers>
                                 <DialogContentText id="alert-dialog-description">
                                     <List>
                                         <ListItem>
@@ -141,10 +142,10 @@ export default function IntroTechBack() {
                             aria-labelledby="alert-dialog-title"
                             aria-describedby="alert-dialog-description"
                         >
-                            <DialogTitle id="alert-dialog-title">
+                            <DialogTitle id="alert-dialog-title" variant="button">
                                 {"BACK-END"}
                             </DialogTitle>
-                            <DialogContent>
+                            <DialogContent dividers>
                                 <DialogContentText id="alert-dialog-description">
                                     <List>
                                         <ListItem>
@@ -202,10 +203,10 @@ export default function IntroTechBack() {
                             aria-labelledby="alert-dialog-title"
                             aria-describedby="alert-dialog-description"
                         >
-                            <DialogTitle id="alert-dialog-title">
+                            <DialogTitle id="alert-dialog-title" variant="button">
                                 {"BACK-END"}
                             </DialogTitle>
-                            <DialogContent>
+                            <DialogContent dividers>
                                 <DialogContentText id="alert-dialog-description">
                                     <List>
                                         <ListItem>
@@ -220,6 +221,7 @@ export default function IntroTechBack() {
                                             </ListItemIcon>
                                             <ListItemText
                                                 primary={"REST API"}
+                                                secondary={<Link href={API_BASE_URL + "/swagger-ui/index.html"}>{"API 살펴보기"}</Link>}
                                             />
                                         </ListItem>
                                         <ListItem>
