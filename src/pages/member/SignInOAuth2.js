@@ -6,7 +6,7 @@ const SignInOAuth2 = (props) => {
 
     if(token) localStorage.setItem("ACCESS_TOKEN", token);
     return (
-        <Navigate to={{ pathname: (token ? "/" : "/signin"), state: { from: props.location }, }} />
+        <Navigate to={{ pathname: (token ? "/todo" : "/signin"), state: { from: props.location }, }} />
     );
 };
 

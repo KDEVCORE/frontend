@@ -23,7 +23,7 @@ export default function SignIn() {
     .then((response) => {
       if (response.token) {
         localStorage.setItem("ACCESS_TOKEN", response.token);
-        window.location.href = "/";
+        window.location.href = "/todo";
       } else {
         setAlertMsg("입력 정보를 확인해 주십시오.");
         setOpen(true);
