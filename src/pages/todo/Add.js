@@ -1,5 +1,5 @@
 import { PlaylistAdd } from "@mui/icons-material";
-import { Box, Button, InputAdornment, TextField } from "@mui/material";
+import { Box, Button, Tooltip } from "@mui/material";
 import React, { useState } from "react";
 
 const Add = (props) => {
@@ -29,42 +29,22 @@ const Add = (props) => {
     });
   };
 
-  const changeTitleHandler = (e) => {
-    setItem({...item, title: e.target.value});
-  };
-
-  const enterKeyEventHandler = (e) => {
-    if (e.key === 'Enter') onButtonClick();
-  };
-
   return (
     <Box
       sx={{
         my: 2,
+        textAlign: "left",
       }}
     >
-      <TextField
-        label="할 일의 제목을 입력해 주세요."
-        fullWidth
-        variant="outlined"
-        onChange={changeTitleHandler}
-        onKeyPress={enterKeyEventHandler}
-        value={item.title}
-        InputProps={{
-          endAdornment:
-            <InputAdornment position="end">
-              <Button
-                variant="contained"
-                color="inherit"
-                onClick={onButtonClick}
-                startIcon={<PlaylistAdd />}
-                fullWidth
-              >
-                ADD
-              </Button>
-            </InputAdornment>,
-        }}
-      />
+      <Tooltip title="할 일을 추가하고 내용을 작성해 주세요" placement="bottom">
+        <Button
+          color="inherit"
+          onClick={onButtonClick}
+          variant="outlined"
+          startIcon={<PlaylistAdd />}>
+          {"추가"}
+        </Button>
+      </Tooltip>
     </Box>
   );
 };

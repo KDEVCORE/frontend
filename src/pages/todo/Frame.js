@@ -41,15 +41,16 @@ export default function Frame() {
     >
       <TodoAdd addItem={addItem} />
       <TableContainer component={Paper}>
-        <Table aria-label="todo list table">
+        <Table stickyHeader aria-label="todo list table" size="small">
           <TableHead>
             <TableRow>
-              <TableCell align="center">{"제목"}</TableCell>
               <TableCell align="center">{"완료"}</TableCell>
+              <TableCell align="center">{"제목"}</TableCell>
               <TableCell align="center">{"진행도"}</TableCell>
               <TableCell align="center">{"우선순위"}</TableCell>
+              <TableCell align="center">{"스트레스"}</TableCell>
               <TableCell align="center">{"마감 날짜"}</TableCell>
-              <TableCell />
+              <TableCell align="center">{"편집"}</TableCell>
             </TableRow>
           </TableHead>
           <TableBody>
