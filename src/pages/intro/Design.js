@@ -79,7 +79,7 @@ export default function IntroTechPlatform() {
                                     <Avatar
                                         alt="flowchart"
                                         variant="square"
-                                        src="/static/design.png"
+                                        src="/static/design_flowchart.png"
                                         sx={{
                                             width: "100%",
                                             height: "100%"
