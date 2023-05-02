@@ -41,19 +41,15 @@ export default function IntroHero () {
             >
                 <Typography variant="subtitle1">
                     {"Demo Web Application"}
-                    {/* {"This website is for a demo project."} */}
                 </Typography>
                 <Typography variant="subtitle1">
-                    {"매우 간단한 구조를 가지고 있으며, 프런트 엔드의 기능도 축약되어 있습니다."}
-                    {/* {"It has a very simple structure, and the function of the front end is also abbreviated."} */}
+                    {"매우 간단한 구조를 가지고 있고 기능도 핵심적인 것만으로 축약되어 있습니다."}
                 </Typography>
                 <Typography variant="subtitle1">
                     {"이 웹이 어떻게 작동하는지 궁금하다면, 현재 페이지의 아래로 이동하십시오."}
-                    {/* {"If you're curious about how this web works, please scroll down this page."} */}
                 </Typography>
                 <Typography variant="subtitle1">
                     {"또는 아래의 '시작하기' 버튼을 클릭하여 데모 콘텐츠를 경험해 보세요."}
-                    {/* {"Or click the 'GET STARTED' button below to experience main content."} */}
                 </Typography>
                 <Typography variant="subtitle1">
                     {"(단, 인증이 필요합니다. 인증 후에 콘텐츠를 경험할 수 있습니다.)"}
