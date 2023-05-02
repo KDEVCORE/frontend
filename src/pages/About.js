@@ -172,6 +172,18 @@ export default function About() {
                         <CardContent>
                             <Typography component="span">{"E-mail: kdevcore@gmail.com"}</Typography>
                         </CardContent>
+                        <CardContent>
+                            <Typography component="span">
+                                {"상세 이력: "}
+                                <Link
+                                    href="https://kdevcore.notion.site/About-me-c77a689de8114d4b91af9d35f7c59230"
+                                    underline="hover"
+                                    target="_blank"
+                                >
+                                    {"보러 가기"}
+                                </Link>
+                            </Typography>
+                        </CardContent>
                     </Card>
                     <Card>
                         <CardHeader
