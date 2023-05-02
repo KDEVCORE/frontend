@@ -1,4 +1,4 @@
-import { Box, Button, Card, CardContent, CardHeader, Chip, Paper, Stack, Step, StepContent, StepLabel, Stepper, Tab, Tabs, Typography } from "@mui/material";
+import { Box, Button, Card, CardContent, CardHeader, Chip, Divider, Link, Paper, Stack, Step, StepContent, StepLabel, Stepper, Tab, Tabs, Typography } from "@mui/material";
 import PropTypes from "prop-types";
 import { useState } from "react";
 
@@ -90,10 +90,10 @@ export default function About() {
     };
 
     return (
-        <Paper sx={{ width: "50%", justifyContent: "center" }}>
+        <Paper>
             <Box sx={{ borderBottom: 1, borderColor: 'divider' }}>
                 <Tabs value={tabIndex} onChange={handleTabChange}>
-                    <Tab label="me" {...a11yProps(0)} />
+                    <Tab label="me" onClick={handleStepReset} {...a11yProps(0)} />
                     <Tab label="contact" {...a11yProps(1)} />
                 </Tabs>
             </Box>
@@ -157,7 +157,41 @@ export default function About() {
                 )}
             </TabPanel>
             <TabPanel value={tabIndex} index={1}>
-                Item Two
+                <Stack
+                    divider={<Divider orientation="vertical" flexItem />}
+                    direction={{ sm: "column", md: "row" }}
+                    spacing={{ sm: 1, md: 2 }}
+                    justifyContent="center"
+                    alignItems="center"
+                >
+                    <Card sx={{ width: "auto" }}>
+                        <CardHeader
+                            title="Information"
+                            subheader="과도한 개인정보 유출을 막기 위해, Email 주소만을 알려 드립니다.🤐"
+                        />
+                        <CardContent>
+                            <Typography component="span">{"E-mail: kdevcore@gmail.com"}</Typography>
+                        </CardContent>
+                    </Card>
+                    <Card>
+                        <CardHeader
+                            title="Blog"
+                            subheader="아직 준비중입니다.😓 그 대신에 GitHub 주소를 첨부합니다."
+                        />
+                        <CardContent>
+                            <Typography component="span">
+                                {"GitHub: "}
+                                <Link
+                                    href="https://github.com/KDEVCORE"
+                                    underline="hover"
+                                    target="_blank"
+                                >
+                                    {"https://github.com/KDEVCORE"}
+                                </Link>
+                            </Typography>
+                        </CardContent>
+                    </Card>
+                </Stack>
             </TabPanel>
         </Paper>
     );
