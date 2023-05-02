@@ -46,17 +46,15 @@ export default function IntroTechFront() {
                 my: 2,
             }}
         >
-            <Button variant="text" disabled>
-                <Typography
-                    variant="button"
-                    sx={{
-                        fontSize: { sm: 32, md: 64 },
-                        fontFamily: { color: "black", textDecorationLine: "underline" }
-                    }}
-                >
-                    {"front-end"}
-                </Typography>
-            </Button>
+            <Typography
+                variant="button"
+                sx={{
+                    fontSize: { sm: 32, md: 64 },
+                    fontFamily: { textDecorationLine: "underline" }
+                }}
+            >
+                {"front-end"}
+            </Typography>
             <Grid
                 container
                 spacing={5}

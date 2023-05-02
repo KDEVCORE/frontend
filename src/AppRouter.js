@@ -8,7 +8,8 @@ import { useEffect, useState } from "react";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import Footer from "./Footer";
 import Header from "./Header";
-import Home from "./Home";
+import About from "./pages/About";
+import Home from "./pages/Home";
 import SignIn from "./pages/member/SignIn";
 import SignInOAuth2 from "./pages/member/SignInOAuth2";
 import SignUp from "./pages/member/SignUp";
@@ -81,6 +82,7 @@ export default function AppRouter(props) {
             <Route path="/signin-oauth" element={<SignInOAuth2 />} />
             <Route path="/signup" element={<SignUp />} />
             <Route path="/todo" element={<Todo />} />
+            <Route path="/about" element={<About />} />
           </Routes>
         </BrowserRouter>
         <Footer />

@@ -1,5 +1,5 @@
-import { AccountCircle, Block, ExitToApp, Home, Verified } from "@mui/icons-material";
-import { AppBar, Box, Chip, Divider, IconButton, Link, Menu, MenuItem, Toolbar, Tooltip, Typography, useScrollTrigger } from "@mui/material";
+import { AccountCircle, Block, ExitToApp, HomeOutlined, Verified } from "@mui/icons-material";
+import { AppBar, Box, Chip, IconButton, Link, Menu, MenuItem, Toolbar, Tooltip, useScrollTrigger } from "@mui/material";
 import PropTypes from 'prop-types';
 import { cloneElement, Fragment, useState } from "react";
 import { signOut } from "./service/ApiService";
@@ -39,28 +39,38 @@ const Header = (props) => {
                 <Toolbar
                     sx={{
                         justifyContent: "center",
-                            alignItems: "center",
-                            textAlign: "center",
+                        alignItems: "center",
+                        textAlign: "center",
                     }}
                 >
-                    <IconButton color="inherit" aria-label="home" component="a" href="/">
-                        <Tooltip title="HOME" placement="bottom">
-                            <Home sx={{ fontSize: { sm: 24, md:48 }}} />
-                        </Tooltip>
-                    </IconButton>
-                    <Typography
-                        variant="button"
-                        component="div"
+                    <Tooltip title="Home" placement="bottom">
+                        <IconButton color="inherit" aria-label="home" component="a" href="/">
+                            <HomeOutlined sx={{ fontSize: { sm: 24, md: 48 } }} />
+                        </IconButton>
+                    </Tooltip>
+                    <Box
                         sx={{
-                            mt: "auto",
                             flexGrow: 1,
+                            display: { xs: 'none', md: 'flex' }
                         }}
-                    />
+                    >
+                        <Link
+                            href="/about"
+                            color="inherit"
+                            variant="button"
+                            underline="none"
+                            sx={{
+                                fontSize: { sm: 8, md: 16 },
+                                mx: 2,
+                            }}
+                        >
+                            {"about"}
+                        </Link>
+                    </Box>
                     <Chip
                         label="Authentication"
                         color={props.auth ? "success" : "default"}
                         icon={props.auth ? <Verified /> : <Block />}
-                        
                     />
                     <Box>
                         {props.auth && (
@@ -73,12 +83,12 @@ const Header = (props) => {
                                     color="inherit"
                                 >
                                     <Tooltip title="Account" placement="bottom">
-                                        <AccountCircle sx={{ fontSize: { sm: 24, md:48 } }} />
+                                        <AccountCircle sx={{ fontSize: { sm: 24, md: 48 } }} />
                                     </Tooltip>
                                 </IconButton>
                                 <Menu
                                     MenuListProps={{
-                                      'aria-labelledby': 'basic-button',
+                                        'aria-labelledby': 'basic-button',
                                     }}
                                     id="menu-appbar"
                                     anchorEl={menuItem}
@@ -98,8 +108,8 @@ const Header = (props) => {
                                         <Link href="/profile" underline="none" variant="button">
                                             {"profile"}
                                         </Link>
-                                    </MenuItem> */}
-                                    <Divider />
+                                    </MenuItem>
+                                    <Divider /> */}
                                     <MenuItem onClick={signOut}>
                                         <Link href="#" underline="none" variant="button">
                                             {"sign out"}
@@ -118,7 +128,7 @@ const Header = (props) => {
                                     color="inherit"
                                 >
                                     <Tooltip title="Member" placement="bottom">
-                                        <ExitToApp sx={{ fontSize: { sm: 24, md:48 } }} />
+                                        <ExitToApp sx={{ fontSize: { sm: 24, md: 48 } }} />
                                     </Tooltip>
                                 </IconButton>
                                 <Menu

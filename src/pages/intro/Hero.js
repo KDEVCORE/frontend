@@ -1,4 +1,4 @@
-import { Button, Container, Divider, Link, Typography } from "@mui/material";
+import { Button, Container, Link, Typography } from "@mui/material";
 import { Box } from "@mui/system";
 
 const HeroBackgroundImage = "/static/images/background/Black_and_White_MOKOKO.jpg";
@@ -20,18 +20,16 @@ export default function IntroHero () {
                 textAlign: "center",
             }}
         >
-            <Button variant="text" disabled>
-                <Typography
-                    variant="button"
-                    sx={{
-                        mt: 6,
-                        fontSize: { sm: 32, md: 64 },
-                        fontFamily: { color: "white", textDecorationLine: "underline" }
-                    }}
-                >
-                    {"welcome"}
-                </Typography>
-            </Button>
+            <Typography
+                variant="button"
+                sx={{
+                    mt: 6,
+                    fontSize: { sm: 32, md: 64 },
+                    fontFamily: { color: "white", textDecorationLine: "underline" }
+                }}
+            >
+                {"welcome"}
+            </Typography>
             <Box
                 sx={{
                     my: 4,
@@ -41,9 +39,8 @@ export default function IntroHero () {
                     }
                 }}
             >
-                <Divider />
                 <Typography variant="subtitle1">
-                    {"포트폴리오 웹입니다."}
+                    {"Demo Web Application"}
                     {/* {"This website is for a demo project."} */}
                 </Typography>
                 <Typography variant="subtitle1">

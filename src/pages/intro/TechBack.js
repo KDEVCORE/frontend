@@ -47,17 +47,15 @@ export default function IntroTechBack() {
                 my: 2,
             }}
         >
-            <Button variant="text" disabled>
-                <Typography
-                    variant="button"
-                    sx={{
-                        fontSize: { sm: 32, md: 64 },
-                        fontFamily: { color: "black", textDecorationLine: "underline" }
-                    }}
-                >
-                    {"back-end"}
-                </Typography>
-            </Button>
+            <Typography
+                variant="button"
+                sx={{
+                    fontSize: { sm: 32, md: 64 },
+                    fontFamily: { textDecorationLine: "underline" }
+                }}
+            >
+                {"back-end"}
+            </Typography>
             <Grid
                 container
                 spacing={5}

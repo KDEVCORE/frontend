@@ -1,10 +1,10 @@
 import { Divider } from "@mui/material";
 import { Fragment } from "react";
-import IntroHero from "./pages/intro/Hero";
-import IntroTechBack from "./pages/intro/TechBack";
-import IntroTechFront from "./pages/intro/TechFront";
-import IntroTechPlatform from "./pages/intro/TechPlatform";
-import IntroDesign from "./pages/intro/Design";
+import IntroHero from "./intro/Hero";
+import IntroTechBack from "./intro/TechBack";
+import IntroTechFront from "./intro/TechFront";
+import IntroTechPlatform from "./intro/TechPlatform";
+import IntroDesign from "./intro/Design";
 
 function Home() {
   return (

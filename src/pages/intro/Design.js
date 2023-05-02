@@ -37,17 +37,15 @@ export default function IntroTechPlatform() {
                 my: 2,
             }}
         >
-            <Button variant="text" disabled>
-                <Typography
-                    variant="button"
-                    sx={{
-                        fontSize: { sm: 32, md: 64 },
-                        fontFamily: { color: "black", textDecorationLine: "underline" }
-                    }}
-                >
-                    {"design"}
-                </Typography>
-            </Button>
+            <Typography
+                variant="button"
+                sx={{
+                    fontSize: { sm: 32, md: 64 },
+                    fontFamily: { textDecorationLine: "underline" }
+                }}
+            >
+                {"design"}
+            </Typography>
             <Grid
                 container
                 spacing={5}

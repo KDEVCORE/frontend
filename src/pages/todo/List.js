@@ -1,5 +1,5 @@
 import { Delete, KeyboardArrowDown, KeyboardArrowUp, Send, SentimentDissatisfied, SentimentSatisfied, SentimentSatisfiedAlt, SentimentVeryDissatisfied, SentimentVerySatisfied } from "@mui/icons-material";
-import { Box, Checkbox, Collapse, IconButton, Paper, Rating, Slider, Switch, Table, TableBody, TableCell, TableContainer, TableRow, TextField, Tooltip, Typography } from "@mui/material";
+import { Box, Checkbox, CircularProgress, Collapse, FormControl, FormHelperText, IconButton, InputLabel, MenuItem, Paper, Rating, Select, Switch, Table, TableBody, TableCell, TableContainer, TableRow, TextField, Tooltip, Typography } from "@mui/material";
 import { styled } from '@mui/material/styles';
 import { DateField, DateTimeField } from "@mui/x-date-pickers";
 import dayjs from "dayjs";
@@ -44,10 +44,38 @@ const customIcons = {
   },
 };
 
+function CircularProgressWithLabel(props) {
+  return (
+    <Box sx={{ position: 'relative', display: 'inline-flex' }}>
+      <CircularProgress variant="determinate"  readOnly {...props} />
+      <Box
+        sx={{
+          top: 0,
+          left: 0,
+          bottom: 0,
+          right: 0,
+          position: 'absolute',
+          display: 'flex',
+          alignItems: 'center',
+          justifyContent: 'center',
+        }}
+      >
+        <Typography variant="caption" component="div">
+          {`${Math.round(props.value)}%`}
+        </Typography>
+      </Box>
+    </Box>
+  );
+}
+
+CircularProgressWithLabel.propTypes = {
+  value: PropTypes.number.isRequired,
+};
+
 const List = (props) => {
   const [item, setItem] = useState(props.item);
   const [open, setOpen] = useState(false);
-  
+
   const editItem = props.editItem;
   const deleteItem = props.deleteItem;
 
@@ -56,30 +84,30 @@ const List = (props) => {
   };
   const editTitleHandler = (event) => {
     item.title = event.target.value;
-    setItem({...item});
+    setItem({ ...item });
   };
   const editDoneHandler = (event) => {
     item.done = event.target.checked;
-    setItem({...item});
+    setItem({ ...item });
   };
   const editProgressHandler = (event) => {
     const value = Number(event.target.value);
     item.progress = value < 0 ? 0 : value > 100 ? 100 : value;
-    setItem({...item});
+    setItem({ ...item });
   };
   const editPriorityHandler = (event) => {
     const value = Number(event.target.value);
     item.priority = value < 1 ? 1 : value > 5 ? 5 : value;
-    setItem({...item});
+    setItem({ ...item });
   };
   const editStressHandler = (event) => {
     const value = Number(event.target.value);
     item.stress = value < 1 ? 1 : value > 5 ? 5 : value;;
-    setItem({...item});
+    setItem({ ...item });
   };
   const editDateHandler = (value) => {
     item.deadline = new Date(dayjs(value));
-    setItem({...item});
+    setItem({ ...item });
   };
 
   const deleteEventHandler = () => {
@@ -88,147 +116,167 @@ const List = (props) => {
 
   return (
     <Fragment>
-        <TableRow>
-          <TableCell align="center">
-            <Switch checked={item.done} readOnly />
-          </TableCell>
-          <TableCell align="center">
-            {item.title}
-          </TableCell>
-          <TableCell align="center">
-            <Slider value={item.progress} readOnly />
-          </TableCell>
-          <TableCell align="center">
-            <Rating value={item.priority} readOnly />
-          </TableCell>
-          <TableCell align="center">
-            <StyledRating value={item.stress} IconContainerComponent={IconContainer} getLabelText={(value) => customIcons[value].label} highlightSelectedOnly readOnly />
-          </TableCell>
-          <TableCell align="center">
-            {new Date(item.deadline).toLocaleDateString()}
-          </TableCell>
-          <TableCell align="center">
-            <IconButton
-              aria-label="expand row"
-              onClick={() => setOpen(!open)}
-            >
-              {open ? <KeyboardArrowUp /> : <KeyboardArrowDown />}
-            </IconButton>
-          </TableCell>
-        </TableRow>
-        <TableRow>
-          <TableCell sx={{ paddingBottom: 0, paddingTop: 0 }} colSpan={7}>
-            <Collapse in={open} timeout="auto" unmountOnExit>
-              <Box sx={{ my: 2 }}>
-                <Typography variant="h6" gutterBottom component="div">
-                  {"편집"}
-                </Typography>
-                <TableContainer component={Paper} sx={{ width: "100%" }}>
-                  <Table>
-                    <TableBody>
-                      <TableRow>
-                        <TableCell align="center">
-                          <Tooltip title="완료여부" placement="bottom">
-                            <Checkbox
-                              checked={item.done}
-                              onChange={editDoneHandler}
-                            />
-                          </Tooltip>
-                        </TableCell>
-                        <TableCell width="20%" align="center">
-                          <TextField
-                            variant="standard"
-                            type="text"
-                            label="제목"
-                            value={item.title}
-                            onChange={editTitleHandler}
-                            fullWidth 
+      <TableRow>
+        <TableCell align="center">
+          <Switch checked={item.done} readOnly />
+        </TableCell>
+        <TableCell align="center">
+          {item.title}
+        </TableCell>
+        <TableCell align="center">
+          <CircularProgressWithLabel value={item.progress} />
+        </TableCell>
+        <TableCell align="center">
+          <Rating value={item.priority} readOnly />
+        </TableCell>
+        <TableCell align="center">
+          <StyledRating value={item.stress} IconContainerComponent={IconContainer} getLabelText={(value) => customIcons[value].label} highlightSelectedOnly readOnly />
+        </TableCell>
+        <TableCell align="center">
+          {new Date(item.deadline).toLocaleDateString()}
+        </TableCell>
+        <TableCell align="center">
+          <IconButton
+            aria-label="expand row"
+            onClick={() => setOpen(!open)}
+          >
+            {open ? <KeyboardArrowUp /> : <KeyboardArrowDown />}
+          </IconButton>
+        </TableCell>
+      </TableRow>
+      <TableRow>
+        <TableCell sx={{ paddingBottom: 0, paddingTop: 0 }} colSpan={7}>
+          <Collapse in={open} timeout="auto" unmountOnExit>
+            <Box sx={{ my: 2 }}>
+              <Typography variant="h6" gutterBottom component="div">
+                {"편집"}
+              </Typography>
+              <TableContainer component={Paper} sx={{ width: "100%" }}>
+                <Table>
+                  <TableBody>
+                    <TableRow>
+                      <TableCell align="center">
+                        <Tooltip title="완료여부" placement="bottom">
+                          <Checkbox
+                            checked={item.done}
+                            onChange={editDoneHandler}
                           />
-                        </TableCell>
-                        <TableCell width="8%" align="center">
-                          <TextField
-                            label="진행도"
-                            variant="standard"
-                            type="number"
-                            value={item.progress}
-                            helperText="0 ~ 100%"
-                            onChange={editProgressHandler}
-                          />
-                        </TableCell>
-                        <TableCell width="7%" align="center">
-                          <TextField
+                        </Tooltip>
+                      </TableCell>
+                      <TableCell width="20%" align="center">
+                        <TextField
+                          variant="standard"
+                          type="text"
+                          label="제목"
+                          value={item.title}
+                          onChange={editTitleHandler}
+                          helperText="입력해 주세요."
+                          fullWidth
+                        />
+                      </TableCell>
+                      <TableCell width="8%" align="center">
+                        <TextField
+                          label="진행도"
+                          variant="standard"
+                          type="number"
+                          value={item.progress}
+                          onChange={editProgressHandler}
+                          helperText="0 ~ 100"
+                        />
+                      </TableCell>
+                      <TableCell width="7%" align="center">
+                        <FormControl variant="standard" fullWidth>
+                          <InputLabel id="select-priority-label">우선순위</InputLabel>
+                          <Select
+                            labelId="select-priority-label"
                             label="우선순위"
-                            variant="standard"
-                            type="number"
                             value={item.priority}
-                            helperText="Lv. 1 ~ 5"
                             onChange={editPriorityHandler}
-                          />
-                        </TableCell>
-                        <TableCell width="7%" align="center">
-                          <TextField
+                          >
+                            <MenuItem value={1}>1</MenuItem>
+                            <MenuItem value={2}>2</MenuItem>
+                            <MenuItem value={3}>3</MenuItem>
+                            <MenuItem value={4}>4</MenuItem>
+                            <MenuItem value={5}>5</MenuItem>
+                          </Select>
+                        </FormControl>
+                        <FormHelperText>1 ~ 5</FormHelperText>
+                      </TableCell>
+                      <TableCell width="7%" align="center">
+                        <FormControl variant="standard" fullWidth>
+                          <InputLabel id="select-stress-label">스트레스</InputLabel>
+                          <Select
+                            labelId="select-stress-label"
                             label="스트레스"
-                            variant="standard"
-                            type="number"
                             value={item.stress}
-                            helperText="Lv. 1 ~ 5"
                             onChange={editStressHandler}
-                          />
-                        </TableCell>
-                        <TableCell width="10%" align="center">
-                          <DateField
-                            label="마감 날짜"
-                            variant="standard"
-                            value={dayjs(item.deadline)}
-                            onChange={(value) => editDateHandler(value)}
-                          />
-                        </TableCell>
-                        <TableCell width="15%" align="center">
-                          <DateTimeField
-                            label="변경 날짜"
-                            variant="standard"
-                            defaultValue={dayjs(item.updatedDate)}
-                            readOnly
-                          />
-                        </TableCell>
-                        <TableCell width="15%" align="center">
-                          <DateTimeField
-                            label="생성 날짜"
-                            variant="standard"
-                            defaultValue={dayjs(item.createdDate)}
-                            readOnly
-                          />
-                        </TableCell>
-                        <TableCell align="center">
-                          <Tooltip title="저장" placement="bottom">
-                            <IconButton
-                              color="info"
-                              aria-label="Edit Todo"
-                              onClick={editSaveHandler}
-                            >
-                              <Send />
-                            </IconButton>
-                          </Tooltip>
-                        </TableCell>
-                        <TableCell align="center">
-                          <Tooltip title="삭제" placement="bottom">
-                            <IconButton
-                              color="error"
-                              aria-label="Delete Todo"
-                              onClick={deleteEventHandler}
-                            >
-                              <Delete />
-                            </IconButton>
-                          </Tooltip>
-                        </TableCell>
-                      </TableRow>
-                    </TableBody>
-                  </Table>
-                </TableContainer>
-              </Box>
-            </Collapse>
-          </TableCell>
-        </TableRow>
+                          >
+                            <MenuItem value={1}>1</MenuItem>
+                            <MenuItem value={2}>2</MenuItem>
+                            <MenuItem value={3}>3</MenuItem>
+                            <MenuItem value={4}>4</MenuItem>
+                            <MenuItem value={5}>5</MenuItem>
+                          </Select>
+                        </FormControl>
+                        <FormHelperText>1 ~ 5</FormHelperText>
+                      </TableCell>
+                      <TableCell width="10%" align="center">
+                        <DateField
+                          label="마감 날짜"
+                          variant="standard"
+                          value={dayjs(item.deadline)}
+                          onChange={(value) => editDateHandler(value)}
+                          helperText="입력해 주세요."
+                        />
+                      </TableCell>
+                      <TableCell width="15%" align="center">
+                        <DateTimeField
+                          label="변경 날짜"
+                          variant="standard"
+                          defaultValue={dayjs(item.updatedDate)}
+                          helperText="수정할 수 없습니다."
+                          readOnly
+                        />
+                      </TableCell>
+                      <TableCell width="15%" align="center">
+                        <DateTimeField
+                          label="생성 날짜"
+                          variant="standard"
+                          defaultValue={dayjs(item.createdDate)}
+                          helperText="수정할 수 없습니다."
+                          readOnly
+                        />
+                      </TableCell>
+                      <TableCell align="center">
+                        <Tooltip title="저장" placement="bottom">
+                          <IconButton
+                            color="info"
+                            aria-label="Edit Todo"
+                            onClick={editSaveHandler}
+                          >
+                            <Send />
+                          </IconButton>
+                        </Tooltip>
+                      </TableCell>
+                      <TableCell align="center">
+                        <Tooltip title="삭제" placement="bottom">
+                          <IconButton
+                            color="error"
+                            aria-label="Delete Todo"
+                            onClick={deleteEventHandler}
+                          >
+                            <Delete />
+                          </IconButton>
+                        </Tooltip>
+                      </TableCell>
+                    </TableRow>
+                  </TableBody>
+                </Table>
+              </TableContainer>
+            </Box>
+          </Collapse>
+        </TableCell>
+      </TableRow>
     </Fragment>
   );
 };
