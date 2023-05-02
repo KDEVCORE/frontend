@@ -219,7 +219,7 @@ export default function IntroTechBack() {
                                             </ListItemIcon>
                                             <ListItemText
                                                 primary={"REST API"}
-                                                secondary={<Link href={API_BASE_URL + "/swagger-ui/index.html"}>{"API 살펴보기"}</Link>}
+                                                secondary={<Link href={API_BASE_URL + "/swagger-ui/index.html"} target="_blank">{"API 살펴보기"}</Link>}
                                             />
                                         </ListItem>
                                         <ListItem>
