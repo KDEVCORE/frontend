@@ -21,5 +21,5 @@ Web 개발 목적의 실습을 위한 프로젝트입니다. Back-End에서 인�
 
 ## Result
 - URL
-  - Front-End: https://app.kdevcore.com
+  - Front-End: https://demo.kdevcore.com
   - Back-End: https://api.kdevcore.com/swagger-ui/index.html
