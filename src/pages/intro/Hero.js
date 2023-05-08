@@ -1,5 +1,6 @@
 import { Button, Container, Link, Typography } from "@mui/material";
 import { Box } from "@mui/system";
+import { getAuthStatus } from "../../service/ApiService";
 
 const HeroBackgroundImage = "/static/images/background/Black_and_White_MOKOKO.jpg";
 
@@ -56,7 +57,7 @@ export default function IntroHero () {
                 </Typography>
             </Box>
             <Link
-                href="/todo"
+                href={getAuthStatus() ? "/todo" : "/signin"}
                 underline="none"
                 variant="button"
             >

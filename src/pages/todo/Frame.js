@@ -1,14 +1,12 @@
 import { Box, CircularProgress, Paper, Table, TableBody, TableCell, TableContainer, TableHead, TableRow } from "@mui/material";
 import { useEffect, useState } from "react";
-import { call, getAuthStatus } from "../../service/ApiService";
+import { call } from "../../service/ApiService";
 import TodoAdd from "./Add";
 import TodoList from "./List";
 
 export default function Frame() {
   const [items, setItems] = useState([]);
   const [loading, setLoading] = useState(true);
-
-  if(!getAuthStatus()) window.location.href = "/signin";
 
   useEffect(() => {
     call("/todo", "GET", null).then((response) => {
@@ -71,9 +69,7 @@ export default function Frame() {
   );
 
   let loadingAnimation = (
-    <Box margin={6} textAlign={"center"}>
-      <CircularProgress size={100} />
-    </Box>
+      <CircularProgress size={100} sx={{ margin: 6 }} />
   );
 
   return (
