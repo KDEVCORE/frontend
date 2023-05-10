@@ -9,12 +9,16 @@ import { BrowserRouter, Route, Routes } from "react-router-dom";
 import Footer from "./Footer";
 import Header from "./Header";
 import About from "./pages/About";
+import PostAdd from "./pages/blog/post/Add";
+import PostEdit from "./pages/blog/post/Edit";
+import PostList from "./pages/blog/post/List";
+import PostView from "./pages/blog/post/View";
 import Home from "./pages/Home";
 import SignIn from "./pages/member/SignIn";
 import SignInOAuth2 from "./pages/member/SignInOAuth2";
 import SignUp from "./pages/member/SignUp";
-import Todo from "./pages/todo/Frame";
-import { getAuthStatus } from "./service/ApiService";
+import Todo from "./pages/todo/Layout";
+import { getAuthStatus, signOut as SignOut } from "./service/ApiService";
 
 function ScrollTop(props) {
   const { children, window } = props;
@@ -77,12 +81,17 @@ export default function AppRouter(props) {
         <Toolbar id="back-to-top-anchor" />
         <BrowserRouter>
           <Routes>
-            <Route path="/" element={<Home />} />
+            <Route index path="/" element={<Home />} />
             <Route path="/signin" element={<SignIn />} />
             <Route path="/signin-oauth" element={<SignInOAuth2 />} />
             <Route path="/signup" element={<SignUp />} />
+            <Route path="/signout" element={<SignOut />} />
             <Route path="/todo" element={<Todo />} />
             <Route path="/about" element={<About />} />
+            <Route path="/post/list" element={<PostList />} />
+            <Route path="/post/add" element={<PostAdd />} />
+            <Route path="/post/view" element={<PostView />} />
+            <Route path="/post/edit" element={<PostEdit />} />
           </Routes>
         </BrowserRouter>
         <Footer />
