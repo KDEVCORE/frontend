@@ -1,8 +1,7 @@
-import { AccountCircleOutlined, Block, ExitToApp, HomeOutlined, InfoOutlined, ReceiptLongOutlined, Verified } from "@mui/icons-material";
-import { AppBar, Box, Button, Chip, Divider, Fade, Menu, MenuItem, Toolbar, Typography, useScrollTrigger } from "@mui/material";
+import { Block, HomeOutlined, InfoOutlined, ReceiptLongOutlined, Verified } from "@mui/icons-material";
+import { AppBar, Box, Button, Chip, Divider, Toolbar, Typography, useScrollTrigger } from "@mui/material";
 import PropTypes from 'prop-types';
-import { cloneElement, useState } from "react";
-import { signOut } from "./service/ApiService";
+import { cloneElement } from "react";
 
 function ElevationScroll(props) {
     const { children, window } = props;
@@ -22,27 +21,7 @@ ElevationScroll.propTypes = {
     window: PropTypes.func,
 };
 
-const notAuthMenu = [
-    {
-        href: "/signin",
-        name: "sign in",
-    },
-    {
-        href: "/signup",
-        name: "sign up",
-    },
-];
-
 const Header = (props) => {
-    const [anchorEl, setAnchorEl] = useState(null);
-    const open = Boolean(anchorEl);
-    const handleClick = (event) => {
-        setAnchorEl(event.currentTarget);
-    };
-    const handleClose = () => {
-        setAnchorEl(null);
-    };
-
     return (
         <ElevationScroll {...props}>
             <AppBar position="fixed" color="inherit">
