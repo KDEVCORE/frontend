@@ -1,7 +1,7 @@
-import { AccountCircle, Block, ExitToApp, HomeOutlined, Verified } from "@mui/icons-material";
-import { AppBar, Box, Chip, IconButton, Link, Menu, MenuItem, Toolbar, Tooltip, useScrollTrigger } from "@mui/material";
+import { AccountCircleOutlined, Block, ExitToApp, HomeOutlined, InfoOutlined, ReceiptLongOutlined, Verified } from "@mui/icons-material";
+import { AppBar, Box, Button, Chip, Divider, Fade, Menu, MenuItem, Toolbar, Typography, useScrollTrigger } from "@mui/material";
 import PropTypes from 'prop-types';
-import { cloneElement, Fragment, useState } from "react";
+import { cloneElement, useState } from "react";
 import { signOut } from "./service/ApiService";
 
 function ElevationScroll(props) {
@@ -22,15 +22,25 @@ ElevationScroll.propTypes = {
     window: PropTypes.func,
 };
 
+const notAuthMenu = [
+    {
+        href: "/signin",
+        name: "sign in",
+    },
+    {
+        href: "/signup",
+        name: "sign up",
+    },
+];
+
 const Header = (props) => {
-    const [menuItem, setMenuItem] = useState(null);
-
-    const handleMenu = (event) => {
-        setMenuItem(event.currentTarget);
+    const [anchorEl, setAnchorEl] = useState(null);
+    const open = Boolean(anchorEl);
+    const handleClick = (event) => {
+        setAnchorEl(event.currentTarget);
     };
-
     const handleClose = () => {
-        setMenuItem(null);
+        setAnchorEl(null);
     };
 
     return (
@@ -43,123 +53,60 @@ const Header = (props) => {
                         textAlign: "center",
                     }}
                 >
-                    <Tooltip title="Home" placement="bottom">
-                        <IconButton color="inherit" aria-label="home" component="a" href="/">
-                            <HomeOutlined sx={{ fontSize: { sm: 24, md: 48 } }} />
-                        </IconButton>
-                    </Tooltip>
                     <Box
                         sx={{
                             flexGrow: 1,
-                            display: { xs: 'none', md: 'flex' }
+                            display: "flex"
                         }}
                     >
-                        <Link
+                        <Button
+                            variant="text"
+                            href="/"
+                            color="inherit"
+                            size="large"
+                            startIcon={<HomeOutlined />}
+                        >
+                            {"home"}
+                        </Button>
+                        <Divider orientation="vertical" variant="middle" flexItem sx={{ mx: 1 }} />
+                        <Button
+                            variant="text"
+                            href="/blog"
+                            color="inherit"
+                            size="large"
+                            startIcon={<ReceiptLongOutlined />}
+                        >
+                            {"blog"}
+                        </Button>
+                        <Divider orientation="vertical" variant="middle" flexItem sx={{ mx: 1 }} />
+                        <Button
+                            variant="text"
                             href="/about"
                             color="inherit"
-                            variant="button"
-                            underline="none"
-                            sx={{
-                                fontSize: { sm: 8, md: 16 },
-                                mx: 2,
-                            }}
+                            size="large"
+                            startIcon={<InfoOutlined />}
                         >
                             {"about"}
-                        </Link>
+                        </Button>
                     </Box>
                     <Chip
-                        label="Authentication"
+                        label={<Typography variant="button">{props.auth ? "certified" : "limited"}</Typography>}
                         color={props.auth ? "success" : "default"}
                         icon={props.auth ? <Verified /> : <Block />}
+                        variant="filled"
                     />
-                    <Box>
-                        {props.auth && (
-                            <Fragment>
-                                <IconButton
-                                    aria-label="account of current user"
-                                    aria-controls="menu-appbar"
-                                    aria-haspopup="true"
-                                    onClick={handleMenu}
-                                    color="inherit"
-                                >
-                                    <Tooltip title="Account" placement="bottom">
-                                        <AccountCircle sx={{ fontSize: { sm: 24, md: 48 } }} />
-                                    </Tooltip>
-                                </IconButton>
-                                <Menu
-                                    MenuListProps={{
-                                        'aria-labelledby': 'basic-button',
-                                    }}
-                                    id="menu-appbar"
-                                    anchorEl={menuItem}
-                                    anchorOrigin={{
-                                        vertical: 'bottom',
-                                        horizontal: 'right',
-                                    }}
-                                    keepMounted
-                                    transformOrigin={{
-                                        vertical: 'top',
-                                        horizontal: 'right',
-                                    }}
-                                    open={Boolean(menuItem)}
-                                    onClose={handleClose}
-                                >
-                                    {/* <MenuItem>
-                                        <Link href="/profile" underline="none" variant="button">
-                                            {"profile"}
-                                        </Link>
-                                    </MenuItem>
-                                    <Divider /> */}
-                                    <MenuItem onClick={signOut}>
-                                        <Link href="#" underline="none" variant="button">
-                                            {"sign out"}
-                                        </Link>
-                                    </MenuItem>
-                                </Menu>
-                            </Fragment>
-                        )}
-                        {!props.auth && (
-                            <Fragment>
-                                <IconButton
-                                    aria-label="member process choice"
-                                    aria-controls="menu-appbar"
-                                    aria-haspopup="true"
-                                    onClick={handleMenu}
-                                    color="inherit"
-                                >
-                                    <Tooltip title="Member" placement="bottom">
-                                        <ExitToApp sx={{ fontSize: { sm: 24, md: 48 } }} />
-                                    </Tooltip>
-                                </IconButton>
-                                <Menu
-                                    id="menu-appbar"
-                                    anchorEl={menuItem}
-                                    anchorOrigin={{
-                                        vertical: 'bottom',
-                                        horizontal: 'right',
-                                    }}
-                                    keepMounted
-                                    transformOrigin={{
-                                        vertical: 'top',
-                                        horizontal: 'right',
-                                    }}
-                                    open={Boolean(menuItem)}
-                                    onClose={handleClose}
-                                >
-                                    <MenuItem>
-                                        <Link href="/signin" underline="none" variant="button">
-                                            {"sign in"}
-                                        </Link>
-                                    </MenuItem>
-                                    <MenuItem>
-                                        <Link href="/signup" underline="none" variant="button">
-                                            {"sign up"}
-                                        </Link>
-                                    </MenuItem>
-                                </Menu>
-                            </Fragment>
-                        )}
-                    </Box>
+                    <Button
+                        href={props.auth ? "/signout" : "/signin"}
+                        variant="text"
+                        color="inherit"
+                        sx={{
+                            ml: 1,
+                            border: 1,
+                            borderRadius: 1,
+                        }}
+                    >
+                        {props.auth ? "sign out" : "sign in"}
+                    </Button>
                 </Toolbar>
             </AppBar>
         </ElevationScroll>
