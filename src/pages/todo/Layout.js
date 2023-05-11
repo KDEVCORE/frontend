@@ -1,4 +1,4 @@
-import { Box, CircularProgress, Paper, Table, TableBody, TableCell, TableContainer, TableHead, TableRow } from "@mui/material";
+import { Badge, Box, Chip, CircularProgress, Paper, Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Typography } from "@mui/material";
 import { useEffect, useState } from "react";
 import { call } from "../../service/ApiService";
 import TodoAdd from "./Add";
@@ -37,6 +37,11 @@ export default function Frame() {
         my: 2,
       }}
     >
+      <Typography variant="h3">
+        <Badge badgeContent="Demo" color="info">
+          {"To-Do List"}
+        </Badge>
+      </Typography>
       <TodoAdd addItem={addItem} />
       <TableContainer component={Paper}>
         <Table stickyHeader aria-label="todo list table" size="small">
