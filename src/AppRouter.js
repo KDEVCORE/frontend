@@ -9,10 +9,6 @@ import { BrowserRouter, Route, Routes } from "react-router-dom";
 import Footer from "./Footer";
 import Header from "./Header";
 import About from "./pages/About";
-import PostAdd from "./pages/blog/post/Add";
-import PostEdit from "./pages/blog/post/Edit";
-import PostList from "./pages/blog/post/List";
-import PostView from "./pages/blog/post/View";
 import Home from "./pages/Home";
 import SignIn from "./pages/member/SignIn";
 import SignInOAuth2 from "./pages/member/SignInOAuth2";
@@ -88,10 +84,6 @@ export default function AppRouter(props) {
             <Route path="/signout" element={<SignOut />} />
             <Route path="/todo" element={<Todo />} />
             <Route path="/about" element={<About />} />
-            <Route path="/post/list" element={<PostList />} />
-            <Route path="/post/add" element={<PostAdd />} />
-            <Route path="/post/view" element={<PostView />} />
-            <Route path="/post/edit" element={<PostEdit />} />
           </Routes>
         </BrowserRouter>
         <Footer />

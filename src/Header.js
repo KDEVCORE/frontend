@@ -1,5 +1,5 @@
 import { Block, HomeOutlined, InfoOutlined, ReceiptLongOutlined, Verified } from "@mui/icons-material";
-import { AppBar, Box, Button, Chip, Divider, Toolbar, Typography, useScrollTrigger } from "@mui/material";
+import { AppBar, Badge, Box, Button, Chip, Divider, Toolbar, Typography, useScrollTrigger } from "@mui/material";
 import PropTypes from 'prop-types';
 import { cloneElement } from "react";
 
@@ -50,12 +50,14 @@ const Header = (props) => {
                         <Divider orientation="vertical" variant="middle" flexItem sx={{ mx: 1 }} />
                         <Button
                             variant="text"
-                            href="/blog"
+                            href="/todo"
                             color="inherit"
                             size="large"
                             startIcon={<ReceiptLongOutlined />}
                         >
-                            {"blog"}
+                            <Badge badgeContent={"Demo"}>
+                                {"todo"}
+                            </Badge>
                         </Button>
                         <Divider orientation="vertical" variant="middle" flexItem sx={{ mx: 1 }} />
                         <Button
