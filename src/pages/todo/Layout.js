@@ -1,10 +1,20 @@
-import { Badge, Box, CircularProgress, Paper, Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Typography } from "@mui/material";
+import { PlaylistAdd } from "@mui/icons-material";
+import { Box, Button, CircularProgress, Paper, Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Tooltip } from "@mui/material";
 import { useEffect, useState } from "react";
 import { call } from "../../service/ApiService";
-import TodoAdd from "./Add";
 import TodoList from "./List";
 
-export default function Frame() {
+export default function Layout() {
+  const [item, setItem] = useState({
+                            title: "",
+                            done: false,
+                            progress: 0,
+                            priority: 1,
+                            stress: 1,
+                            deadline: new Date(),
+                            createdDate: null,
+                            updatedDate: null,
+                          });
   const [items, setItems] = useState([]);
   const [loading, setLoading] = useState(true);
 
@@ -30,19 +40,41 @@ export default function Frame() {
       .then((response) => setItems(response.data));
   };
 
+  const onButtonClick = () => {
+    addItem(item);
+    setItem({
+      title: "",
+      done: false,
+      progress: 0,
+      priority: 1,
+      stress: 1,
+      deadline: new Date(),
+      createdDate: null,
+      updatedDate: null,
+    });
+  };
+
   let todoPage = (
     <Paper
       elevation={0}
-      sx={{
-        my: 2,
-      }}
+      sx={{ mb: 2 }}
     >
-      <Typography variant="h3">
-        <Badge badgeContent="Demo" color="info">
-          {"To-Do List"}
-        </Badge>
-      </Typography>
-      <TodoAdd addItem={addItem} />
+      <Box
+        sx={{
+          my: 2,
+          textAlign: "left",
+        }}
+      >
+        <Tooltip title="할 일을 추가하고 내용을 작성해 주세요" placement="bottom">
+          <Button
+            color="inherit"
+            onClick={onButtonClick}
+            variant="outlined"
+            startIcon={<PlaylistAdd />}>
+            {"추가"}
+          </Button>
+        </Tooltip>
+      </Box>
       <TableContainer component={Paper}>
         <Table stickyHeader aria-label="todo list table" size="small">
           <TableHead>
