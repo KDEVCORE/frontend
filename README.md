@@ -18,6 +18,7 @@ Web 개발 목적의 실습을 위한 프로젝트입니다. Back-End에서 인�
 ## Deployment
 배포는 다음의 솔루션을 사용합니다.
 - AWS Elastic Beanstalk
+- AWS EC2
 
 ## Result
 - URL
