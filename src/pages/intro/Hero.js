@@ -1,10 +1,11 @@
-import { Button, Container, Link, Typography } from "@mui/material";
+import { PlayArrow } from "@mui/icons-material";
+import { Button, Container, Typography } from "@mui/material";
 import { Box } from "@mui/system";
 import { getAuthStatus } from "../../service/ApiService";
 
 const HeroBackgroundImage = "/static/images/background/Black_and_White_MOKOKO.jpg";
 
-export default function IntroHero () {
+export default function IntroHero() {
     return (
         <Container
             component="section"
@@ -19,12 +20,12 @@ export default function IntroHero () {
                 justifyContent: "center",
                 alignItems: "center",
                 textAlign: "center",
+                padding: 4,
             }}
         >
             <Typography
                 variant="button"
                 sx={{
-                    mt: 6,
                     fontSize: { sm: 32, md: 64 },
                     fontFamily: { color: "white", textDecorationLine: "underline" }
                 }}
@@ -33,11 +34,10 @@ export default function IntroHero () {
             </Typography>
             <Box
                 sx={{
-                    my: 4,
                     textAlign: "center",
                     fontFamily: {
                         color: "#ffffff",
-                    }
+                    },
                 }}
             >
                 <Typography variant="subtitle1">
@@ -52,20 +52,15 @@ export default function IntroHero () {
                 <Typography variant="subtitle1">
                     {"(단, 인증이 필요합니다. 인증 후에 콘텐츠를 경험할 수 있습니다.)"}
                 </Typography>
-            </Box>
-            <Link
-                href={getAuthStatus() ? "/todo" : "/signin"}
-                underline="none"
-                variant="button"
-            >
                 <Button
                     variant="contained"
+                    href={getAuthStatus() ? "/todo" : "/signin"}
                     color="info"
-                    sx={{ mb: 8 }}
+                    startIcon={<PlayArrow />}
                 >
                     {"시작하기"}
                 </Button>
-            </Link>
+            </Box>
         </Container>
     );
 }

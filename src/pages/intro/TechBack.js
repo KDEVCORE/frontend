@@ -1,5 +1,5 @@
 import { Check, DeveloperBoard, PowerSettingsNew, VerifiedUserOutlined } from "@mui/icons-material";
-import { Button, Card, CardActionArea, CardContent, Container, Dialog, DialogActions, DialogContent, DialogContentText, DialogTitle, Grid, Link, List, ListItem, ListItemIcon, ListItemText, Typography } from "@mui/material";
+import { Button, Card, CardActionArea, CardContent, Container, Dialog, DialogActions, DialogContent, DialogTitle, Grid, Link, List, ListItem, ListItemIcon, ListItemText, Typography } from "@mui/material";
 import { useState } from "react";
 import { API_BASE_URL } from "../../appConfig";
 
@@ -44,7 +44,6 @@ export default function IntroTechBack() {
                 flexDirection: "column",
                 alignItems: "center",
                 padding: 4,
-                my: 2,
             }}
         >
             <Typography
@@ -83,40 +82,38 @@ export default function IntroTechBack() {
                                 {"BACK-END"}
                             </DialogTitle>
                             <DialogContent dividers>
-                                <DialogContentText id="alert-dialog-description">
-                                    <List>
-                                        <ListItem>
-                                            <ListItemText
-                                                primary={"Authentication"}
-                                                secondary={"인증 방식은 JWT. 회원 로그인은 ID/Password 판별, SSO 로그인은 OAuth 2 방식을 도입하여 구현했습니다."}
-                                            />
-                                        </ListItem>
-                                        <ListItem>
-                                            <ListItemIcon>
-                                                <Check />
-                                            </ListItemIcon>
-                                            <ListItemText
-                                                primary={"JWT(JSON Web Token)"}
-                                            />
-                                        </ListItem>
-                                        <ListItem>
-                                            <ListItemIcon>
-                                                <Check />
-                                            </ListItemIcon>
-                                            <ListItemText
-                                                primary={"OAuth 2"}
-                                            />
-                                        </ListItem>
-                                        <ListItem>
-                                            <ListItemIcon>
-                                                <Check />
-                                            </ListItemIcon>
-                                            <ListItemText
-                                                primary={"Password Encryption"}
-                                            />
-                                        </ListItem>
-                                    </List>
-                                </DialogContentText>
+                                <List>
+                                    <ListItem>
+                                        <ListItemText
+                                            primary={"Authentication"}
+                                            secondary={"인증 방식은 JWT. 회원 로그인은 ID/Password 판별, SSO 로그인은 OAuth 2 방식을 도입하여 구현했습니다."}
+                                        />
+                                    </ListItem>
+                                    <ListItem>
+                                        <ListItemIcon>
+                                            <Check />
+                                        </ListItemIcon>
+                                        <ListItemText
+                                            primary={"JWT(JSON Web Token)"}
+                                        />
+                                    </ListItem>
+                                    <ListItem>
+                                        <ListItemIcon>
+                                            <Check />
+                                        </ListItemIcon>
+                                        <ListItemText
+                                            primary={"OAuth 2"}
+                                        />
+                                    </ListItem>
+                                    <ListItem>
+                                        <ListItemIcon>
+                                            <Check />
+                                        </ListItemIcon>
+                                        <ListItemText
+                                            primary={"Password Encryption"}
+                                        />
+                                    </ListItem>
+                                </List>
                             </DialogContent>
                             <DialogActions>
                                 <Button onClick={handleClose} autoFocus>{"Close"}</Button>
@@ -144,40 +141,38 @@ export default function IntroTechBack() {
                                 {"BACK-END"}
                             </DialogTitle>
                             <DialogContent dividers>
-                                <DialogContentText id="alert-dialog-description">
-                                    <List>
-                                        <ListItem>
-                                            <ListItemText
-                                                primary={"Spring"}
-                                                secondary={"Java 프로그래밍을 이용하여, Back-End를 구성할 수 있는 프레임워크를 사용했습니다."}
-                                            />
-                                        </ListItem>
-                                        <ListItem>
-                                            <ListItemIcon>
-                                                <Check />
-                                            </ListItemIcon>
-                                            <ListItemText
-                                                primary={"Spring Boot"}
-                                            />
-                                        </ListItem>
-                                        <ListItem>
-                                            <ListItemIcon>
-                                                <Check />
-                                            </ListItemIcon>
-                                            <ListItemText
-                                                primary={"Spring Security"}
-                                            />
-                                        </ListItem>
-                                        <ListItem>
-                                            <ListItemIcon>
-                                                <Check />
-                                            </ListItemIcon>
-                                            <ListItemText
-                                                primary={"Spring Data JPA"}
-                                            />
-                                        </ListItem>
-                                    </List>
-                                </DialogContentText>
+                                <List>
+                                    <ListItem>
+                                        <ListItemText
+                                            primary={"Spring"}
+                                            secondary={"Java 프로그래밍을 이용하여, Back-End를 구성할 수 있는 프레임워크를 사용했습니다."}
+                                        />
+                                    </ListItem>
+                                    <ListItem>
+                                        <ListItemIcon>
+                                            <Check />
+                                        </ListItemIcon>
+                                        <ListItemText
+                                            primary={"Spring Boot"}
+                                        />
+                                    </ListItem>
+                                    <ListItem>
+                                        <ListItemIcon>
+                                            <Check />
+                                        </ListItemIcon>
+                                        <ListItemText
+                                            primary={"Spring Security"}
+                                        />
+                                    </ListItem>
+                                    <ListItem>
+                                        <ListItemIcon>
+                                            <Check />
+                                        </ListItemIcon>
+                                        <ListItemText
+                                            primary={"Spring Data JPA"}
+                                        />
+                                    </ListItem>
+                                </List>
                             </DialogContent>
                             <DialogActions>
                                 <Button onClick={handleClose} autoFocus>{"Close"}</Button>
@@ -205,33 +200,31 @@ export default function IntroTechBack() {
                                 {"BACK-END"}
                             </DialogTitle>
                             <DialogContent dividers>
-                                <DialogContentText id="alert-dialog-description">
-                                    <List>
-                                        <ListItem>
-                                            <ListItemText
-                                                primary={"Structure"}
-                                                secondary={"RESTful에 맞게 API를 작성했고, Annotation을 사용하여 계층을 구분한 시스템을 구현했습니다."}
-                                            />
-                                        </ListItem>
-                                        <ListItem>
-                                            <ListItemIcon>
-                                                <Check />
-                                            </ListItemIcon>
-                                            <ListItemText
-                                                primary={"REST API"}
-                                                secondary={<Link href={API_BASE_URL + "/swagger-ui/index.html"} target="_blank">{"API 살펴보기"}</Link>}
-                                            />
-                                        </ListItem>
-                                        <ListItem>
-                                            <ListItemIcon>
-                                                <Check />
-                                            </ListItemIcon>
-                                            <ListItemText
-                                                primary={"Layered System"}
-                                            />
-                                        </ListItem>
-                                    </List>
-                                </DialogContentText>
+                                <List>
+                                    <ListItem>
+                                        <ListItemText
+                                            primary={"Structure"}
+                                            secondary={"RESTful에 맞게 API를 작성했고, Annotation을 사용하여 계층을 구분한 시스템을 구현했습니다."}
+                                        />
+                                    </ListItem>
+                                    <ListItem>
+                                        <ListItemIcon>
+                                            <Check />
+                                        </ListItemIcon>
+                                        <ListItemText
+                                            primary={"REST API"}
+                                            secondary={<Link href={API_BASE_URL + "/swagger-ui/index.html"} target="_blank">{"API 살펴보기"}</Link>}
+                                        />
+                                    </ListItem>
+                                    <ListItem>
+                                        <ListItemIcon>
+                                            <Check />
+                                        </ListItemIcon>
+                                        <ListItemText
+                                            primary={"Layered System"}
+                                        />
+                                    </ListItem>
+                                </List>
                             </DialogContent>
                             <DialogActions>
                                 <Button onClick={handleClose} autoFocus>{"Close"}</Button>

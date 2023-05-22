@@ -10,12 +10,12 @@ const item = {
 };
 
 const number = {
-    fontSize: {xs: 40, sm: 64, md: 128},
+    fontSize: { xs: 40, sm: 64, md: 128 },
     fontFamily: 'default',
     textAlign: "center",
 };
 
-export default function IntroTechPlatform () {
+export default function IntroTechPlatform() {
     const [open1, setOpen1] = useState(false);
 
     const handleClickOpen1 = () => {
@@ -34,7 +34,6 @@ export default function IntroTechPlatform () {
                 flexDirection: "column",
                 alignItems: "center",
                 padding: 4,
-                my: 2,
             }}
         >
             <Typography
@@ -57,7 +56,7 @@ export default function IntroTechPlatform () {
                     <Card sx={item} elevation={10}>
                         <CardActionArea onClick={handleClickOpen1}>
                             <CardContent sx={number}>
-                                <StorageOutlined sx={{ fontSize: {xs: 40, sm: 64, md: 128} }} />
+                                <StorageOutlined sx={{ fontSize: { xs: 40, sm: 64, md: 128 } }} />
                                 <Typography variant="h4">
                                     {"AWS"}
                                 </Typography>
@@ -70,43 +69,41 @@ export default function IntroTechPlatform () {
                             aria-describedby="alert-dialog-description"
                         >
                             <DialogTitle id="alert-dialog-title" variant="button">
-                                {"PLATFORM"}
+                                {"platform"}
                             </DialogTitle>
                             <DialogContent dividers>
-                                <DialogContentText id="alert-dialog-description">
-                                    <List>
-                                        <ListItem>
-                                            <ListItemText
-                                                primary={"AWS(Amazon Web Services)"}
-                                                secondary={"클라우드 컴퓨팅 환경을 경험해보기 위해 PaaS 중에서 대중적인 플랫폼을 이용했습니다."}
-                                            />
-                                        </ListItem>
-                                        <ListItem>
-                                            <ListItemIcon>
-                                                <Check />
-                                            </ListItemIcon>
-                                            <ListItemText
-                                                primary={"EC2(Elastic Compute Cloud)"}
-                                            />
-                                        </ListItem>
-                                        <ListItem>
-                                            <ListItemIcon>
-                                                <Check />
-                                            </ListItemIcon>
-                                            <ListItemText
-                                                primary={"Elastic Beanstalk"}
-                                            />
-                                        </ListItem>
-                                        <ListItem>
-                                            <ListItemIcon>
-                                                <Check />
-                                            </ListItemIcon>
-                                            <ListItemText
-                                                primary={"Route 53"}
-                                            />
-                                        </ListItem>
-                                    </List>
-                                </DialogContentText>
+                                <List>
+                                    <ListItem>
+                                        <ListItemText
+                                            primary="AWS(Amazon Web Services)"
+                                            secondary="클라우드 컴퓨팅 환경을 경험해보기 위해 PaaS 중에서 대중적인 플랫폼을 이용했습니다."
+                                        />
+                                    </ListItem>
+                                    <ListItem>
+                                        <ListItemIcon>
+                                            <Check />
+                                        </ListItemIcon>
+                                        <ListItemText
+                                            primary="EC2(Elastic Compute Cloud)"
+                                        />
+                                    </ListItem>
+                                    <ListItem>
+                                        <ListItemIcon>
+                                            <Check />
+                                        </ListItemIcon>
+                                        <ListItemText
+                                            primary="Elastic Beanstalk"
+                                        />
+                                    </ListItem>
+                                    <ListItem>
+                                        <ListItemIcon>
+                                            <Check />
+                                        </ListItemIcon>
+                                        <ListItemText
+                                            primary="Route 53"
+                                        />
+                                    </ListItem>
+                                </List>
                             </DialogContent>
                             <DialogActions>
                                 <Button onClick={handleClose} autoFocus>{"Close"}</Button>

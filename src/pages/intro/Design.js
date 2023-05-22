@@ -34,7 +34,6 @@ export default function IntroTechPlatform() {
                 flexDirection: "column",
                 alignItems: "center",
                 padding: 4,
-                my: 2,
             }}
         >
             <Typography
@@ -73,17 +72,15 @@ export default function IntroTechPlatform() {
                                 {"design"}
                             </DialogTitle>
                             <DialogContent dividers>
-                                <DialogContentText id="alert-dialog-description">
-                                    <Avatar
-                                        alt="flowchart"
-                                        variant="square"
-                                        src="/static/design_flowchart.png"
-                                        sx={{
-                                            width: "100%",
-                                            height: "100%"
-                                        }}
-                                    />
-                                </DialogContentText>
+                                <Avatar
+                                    alt="flowchart"
+                                    variant="square"
+                                    src="/static/design_flowchart.png"
+                                    sx={{
+                                        width: "100%",
+                                        height: "100%"
+                                    }}
+                                />
                             </DialogContent>
                             <DialogActions>
                                 <Button onClick={handleClose} autoFocus>{"Close"}</Button>
