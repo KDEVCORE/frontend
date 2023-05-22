@@ -34,7 +34,7 @@ export default function IntroHero() {
             <Button
                 variant="contained"
                 href={getAuthStatus() ? "/todo" : "/signin"}
-                color="info"
+                color="error"
                 startIcon={<PlayArrow />}
             >
                 {"시작하기"}
