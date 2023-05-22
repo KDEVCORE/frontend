@@ -172,7 +172,7 @@ export default function About() {
                     <CardActions>
                         <Button
                             variant="text"
-                            href="https://kdevcore.notion.site/About-me-c77a689de8114d4b91af9d35f7c59230"
+                            href="https://career.programmers.co.kr/pr/kdevcore_6838"
                             color="inherit"
                             size="large"
                             target="_blank"
