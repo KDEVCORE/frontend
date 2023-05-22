@@ -120,7 +120,7 @@ export default function About() {
                                         <Stack direction="row" spacing={1} sx={{ mt: 2 }}>
                                             {chipData.map((data) => {
                                                 return (
-                                                    <strong><Chip key={data.key} label={data.label} variant="outlined" /></strong>
+                                                    <Chip key={data.key} label={data.label} variant="outlined" />
                                                 );
                                             })}
                                         </Stack>
