@@ -1,5 +1,5 @@
 import { AccountTreeOutlined } from "@mui/icons-material";
-import { Avatar, Button, Card, CardActionArea, CardContent, Container, Dialog, DialogActions, DialogContent, DialogContentText, DialogTitle, Grid, Typography } from "@mui/material";
+import { Avatar, Button, Card, CardActionArea, CardContent, Container, Dialog, DialogActions, DialogContent, DialogTitle, Grid, Typography } from "@mui/material";
 import { useState } from "react";
 
 const item = {
@@ -30,11 +30,11 @@ export default function IntroTechPlatform() {
         <Container
             component="section"
             sx={{
-                display: "flex",
-                flexDirection: "column",
+                textAlign: "center",
                 alignItems: "center",
                 padding: 4,
             }}
+            maxWidth="xl"
         >
             <Typography
                 variant="button"

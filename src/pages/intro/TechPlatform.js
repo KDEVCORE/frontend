@@ -1,5 +1,5 @@
 import { Check, StorageOutlined } from "@mui/icons-material";
-import { Button, Card, CardActionArea, CardContent, Container, Dialog, DialogActions, DialogContent, DialogContentText, DialogTitle, Grid, List, ListItem, ListItemIcon, ListItemText, Typography } from "@mui/material";
+import { Button, Card, CardActionArea, CardContent, Container, Dialog, DialogActions, DialogContent, DialogTitle, Grid, List, ListItem, ListItemIcon, ListItemText, Typography } from "@mui/material";
 import { useState } from "react";
 
 const item = {
@@ -30,11 +30,11 @@ export default function IntroTechPlatform() {
         <Container
             component="section"
             sx={{
-                display: "flex",
-                flexDirection: "column",
+                textAlign: "center",
                 alignItems: "center",
                 padding: 4,
             }}
+            maxWidth="xl"
         >
             <Typography
                 variant="button"
@@ -76,7 +76,7 @@ export default function IntroTechPlatform() {
                                     <ListItem>
                                         <ListItemText
                                             primary="AWS(Amazon Web Services)"
-                                            secondary="클라우드 컴퓨팅 환경을 경험해보기 위해 PaaS 중에서 대중적인 플랫폼을 이용했습니다."
+                                            secondary="클라우드 컴퓨팅 환경 경험을 목적으로 사용했습니다."
                                         />
                                     </ListItem>
                                     <ListItem>

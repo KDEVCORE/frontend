@@ -40,11 +40,11 @@ export default function IntroTechBack() {
         <Container
             component="section"
             sx={{
-                display: "flex",
-                flexDirection: "column",
+                textAlign: "center",
                 alignItems: "center",
                 padding: 4,
             }}
+            maxWidth="xl"
         >
             <Typography
                 variant="button"
@@ -79,7 +79,7 @@ export default function IntroTechBack() {
                             aria-describedby="alert-dialog-description"
                         >
                             <DialogTitle id="alert-dialog-title" variant="button">
-                                {"BACK-END"}
+                                {"back-end"}
                             </DialogTitle>
                             <DialogContent dividers>
                                 <List>
@@ -138,14 +138,14 @@ export default function IntroTechBack() {
                             aria-describedby="alert-dialog-description"
                         >
                             <DialogTitle id="alert-dialog-title" variant="button">
-                                {"BACK-END"}
+                                {"back-end"}
                             </DialogTitle>
                             <DialogContent dividers>
                                 <List>
                                     <ListItem>
                                         <ListItemText
-                                            primary={"Spring"}
-                                            secondary={"Java 프로그래밍을 이용하여, Back-End를 구성할 수 있는 프레임워크를 사용했습니다."}
+                                            primary="Spring"
+                                            secondary="Java 프로그래밍을 이용하여, Back-End를 구성할 수 있는 프레임워크를 사용했습니다."
                                         />
                                     </ListItem>
                                     <ListItem>
@@ -153,7 +153,7 @@ export default function IntroTechBack() {
                                             <Check />
                                         </ListItemIcon>
                                         <ListItemText
-                                            primary={"Spring Boot"}
+                                            primary="Spring Boot"
                                         />
                                     </ListItem>
                                     <ListItem>
@@ -161,7 +161,7 @@ export default function IntroTechBack() {
                                             <Check />
                                         </ListItemIcon>
                                         <ListItemText
-                                            primary={"Spring Security"}
+                                            primary="Spring Security"
                                         />
                                     </ListItem>
                                     <ListItem>
@@ -169,7 +169,7 @@ export default function IntroTechBack() {
                                             <Check />
                                         </ListItemIcon>
                                         <ListItemText
-                                            primary={"Spring Data JPA"}
+                                            primary="Spring Data JPA"
                                         />
                                     </ListItem>
                                 </List>
@@ -197,14 +197,14 @@ export default function IntroTechBack() {
                             aria-describedby="alert-dialog-description"
                         >
                             <DialogTitle id="alert-dialog-title" variant="button">
-                                {"BACK-END"}
+                                {"back-end"}
                             </DialogTitle>
                             <DialogContent dividers>
                                 <List>
                                     <ListItem>
                                         <ListItemText
                                             primary={"Structure"}
-                                            secondary={"RESTful에 맞게 API를 작성했고, Annotation을 사용하여 계층을 구분한 시스템을 구현했습니다."}
+                                            secondary={"RESTful에 맞게 API를 작성했고, Annotation으로 구분된 계층 시스템을 구현했습니다."}
                                         />
                                     </ListItem>
                                     <ListItem>
@@ -214,14 +214,6 @@ export default function IntroTechBack() {
                                         <ListItemText
                                             primary={"REST API"}
                                             secondary={<Link href={API_BASE_URL + "/swagger-ui/index.html"} target="_blank">{"API 살펴보기"}</Link>}
-                                        />
-                                    </ListItem>
-                                    <ListItem>
-                                        <ListItemIcon>
-                                            <Check />
-                                        </ListItemIcon>
-                                        <ListItemText
-                                            primary={"Layered System"}
                                         />
                                     </ListItem>
                                 </List>
