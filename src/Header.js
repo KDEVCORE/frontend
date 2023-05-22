@@ -22,9 +22,6 @@ ElevationScroll.propTypes = {
 };
 
 const Header = (props) => {
-    // const theme = useTheme();
-    // const colorMode = useContext(props.colorModeContext);
-
     return (
         <ElevationScroll {...props}>
             <AppBar position="fixed" color="inherit">
@@ -71,12 +68,6 @@ const Header = (props) => {
                             {"about"}
                         </Button>
                     </Box>
-                    {/* <Chip
-                        label={<Typography variant="button">{theme.palette.mode}</Typography>}
-                        color="default"
-                        icon={theme.palette.mode === 'dark' ? <Brightness4 /> : <Brightness7 />}
-                        onClick={colorMode.toggleColorMode}
-                    /> */}
                     <Chip
                         label={<Typography variant="button">{props.auth ? "certified" : "limited"}</Typography>}
                         color={props.auth ? "success" : "default"}
