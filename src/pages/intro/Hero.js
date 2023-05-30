@@ -29,6 +29,14 @@ export default function IntroHero() {
                     fontFamily: { color: "white"},
                 }}
             >
+                {"이 웹은 포트폴리오용 데모 프로젝트입니다."}
+            </Typography>
+            <Typography
+                variant="subtitle1"
+                sx={{
+                    fontFamily: { color: "white"},
+                }}
+            >
                 {"매우 간단한 구조를 가지고 있고 축약된 기능만 구현 되었습니다."}
             </Typography>
             <Button
